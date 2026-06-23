@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects &middot; Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-head">
+    <div class="container">
+      <a class="back" href="index.html">&larr; Back to home</a>
+      <h1>Projects</h1>
+      <p>Three projects focused on practical automation: efficiency reporting,
+         education promotion, and AI music creation.</p>
+    </div>
+  </header>
+
+  <main class="projects">
+    <div class="container">
+
+      <!-- ============ PROJECT 1 ============ -->
+      <section class="project">
+        <div class="project-header">
+          <div class="project-index">01</div>
+          <div>
+            <h2>Non-Conform Data Processing Efficiency Improvement</h2>
+            <span class="tag">AI · DATA AUTOMATION · DASHBOARD</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="desc">
+            解決每週彙整全廠數據耗費大量工時的痛點，透過 AI（GEMINI 免費版）輔助生成程式碼，
+            實現數據自動化處理與視覺化呈現。從 T100 系統下載 Excel 週報，直接匯入程式，
+            5 分鐘內即可產出完整的不良品（Non Conform）分析看板。
+          </p>
+
+          <!-- Before / After (rebuilt in HTML — no image needed) -->
+          <div class="compare">
+            <div class="card before">
+              <span class="badge">導入前 / Before</span>
+              <div class="num">2</div>
+              <div class="unit">小時以上 (hrs+)</div>
+              <div class="note">人工彙整資料<br>Manual data aggregation</div>
+            </div>
+            <div class="arrow">
+              <span class="glyph">&rarr;</span>
+              <span class="pct">效率提升 96% &uarr;</span>
+            </div>
+            <div class="card after">
+              <span class="badge">導入後 / After</span>
+              <div class="num">5</div>
+              <div class="unit">分鐘以內 (min)</div>
+              <div class="note">T100 下載 → 匯入程式 → 即時產出看板<br>Download → Import → Instant dashboard</div>
+            </div>
+          </div>
+
+          <!-- Workflow -->
+          <div class="section-title">導入後作業流程 · Workflow</div>
+          <div class="grid-3">
+            <div class="mini"><div class="k">01</div><h4>下載數據</h4><p>從 T100 系統下載 Excel 週報數據</p></div>
+            <div class="mini"><div class="k">02</div><h4>匯入程式</h4><p>直接匯入 AI 程式進行自動化分析</p></div>
+            <div class="mini"><div class="k">03</div><h4>產出看板</h4><p>5 分鐘內生成完整視覺化數據看板</p></div>
+          </div>
+
+          <!-- KPI cards described -->
+          <div class="section-title">摘要 KPI 卡片 · 4 項指標</div>
+          <div class="grid-4">
+            <div class="mini"><h4>總報廢金額</h4><p>Total scrap cost (NT$)</p></div>
+            <div class="mini"><h4>總品名數</h4><p>受影響的產品總數</p></div>
+            <div class="mini"><h4>不良原因數</h4><p>不同不良類型的數量</p></div>
+            <div class="mini"><h4>影響部門數</h4><p>受影響的部門數量</p></div>
+          </div>
+
+          <!-- Charts described -->
+          <div class="section-title">視覺圖表 · 4 種圖表 × 3 個維度</div>
+          <p class="desc">
+            合三個主要分析維度（品名、部門、不良原因）各自支援 4 種可切換圖表：
+            <strong>水平長條圖</strong>（依報廢金額排序）、<strong>堆疊長條圖</strong>（拆解子分類）、
+            <strong>Pareto 圖</strong>（長條 + 累積佔比折線）、<strong>圓餅圖</strong>（比例分佈）。
+            另含第 5 種圖表 — <strong>每日報廢趨勢折線圖</strong>，懸停顯示當天前三大報廢品名。
+          </p>
+
+          <!-- Screenshots -->
+          <div class="section-title">實際畫面 · Screenshots</div>
+          <div class="gallery">
+            <figure>
+              <img src="images/non-conform-overview.png" alt="Non Conform report overview"
+                   data-label="專案總覽簡報" onerror="imgFallback(this)" />
+              <figcaption>專案總覽（欄位需求 + KPI + 圖表說明）</figcaption>
+            </figure>
+            <figure>
+              <img src="images/non-conform-dashboard.png" alt="Non Conform dashboard"
+                   data-label="不良品分析看板" onerror="imgFallback(this)" />
+              <figcaption>Non Conform Report 互動式分析看板</figcaption>
+            </figure>
+            <figure>
+              <img src="images/non-conform-excel.png" alt="T100 exported Excel data"
+                   data-label="T100 匯出 Excel" onerror="imgFallback(this)" />
+              <figcaption>T100 csfr019 匯出的原始 Excel 週報</figcaption>
+            </figure>
+            <figure>
+              <img src="images/non-conform-comparison.png" alt="Before/after comparison slide"
+                   data-label="導入前後比較簡報" onerror="imgFallback(this)" />
+              <figcaption>導入前後工作時間差異比較</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECT 2 ============ -->
+      <section class="project">
+        <div class="project-header">
+          <div class="project-index">02</div>
+          <div>
+            <h2>OCAC Education Promotion</h2>
+            <span class="tag">PICTURE SLIDESHOW · OUTREACH</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="desc">
+            A picture slideshow for the OCAC (僑委會 / Overseas Community Affairs Council)
+            education promotion. Use the arrows or dots below to browse through the slides.
+            <em>Images not uploaded yet — drop them into the <code>images/</code> folder
+            as <code>ocac-1.jpg</code>, <code>ocac-2.jpg</code>, <code>ocac-3.jpg</code>.</em>
+          </p>
+
+          <div class="slideshow" id="ocac">
+            <div class="slides">
+              <div class="slide active">
+                <img src="images/ocac-1.jpg" alt="OCAC slide 1"
+                     data-label="OCAC 簡報 1" onerror="imgFallback(this)" />
+              </div>
+              <div class="slide">
+                <img src="images/ocac-2.jpg" alt="OCAC slide 2"
+                     data-label="OCAC 簡報 2" onerror="imgFallback(this)" />
+              </div>
+              <div class="slide">
+                <img src="images/ocac-3.jpg" alt="OCAC slide 3"
+                     data-label="OCAC 簡報 3" onerror="imgFallback(this)" />
+              </div>
+            </div>
+            <button class="slide-nav prev" aria-label="Previous slide">&lsaquo;</button>
+            <button class="slide-nav next" aria-label="Next slide">&rsaquo;</button>
+            <div class="dots"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECT 3 ============ -->
+      <section class="project">
+        <div class="project-header">
+          <div class="project-index">03</div>
+          <div>
+            <h2>AI Music Creation with Suno</h2>
+            <span class="tag">GENERATIVE AI · MUSIC</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="desc">
+            Composing original music using <strong>Suno</strong> AI. Below is a YouTube
+            preview of one of the generated tracks.
+          </p>
+
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/4ILfhN7w7qg"
+                    title="Suno AI music preview"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
+
+          <div style="margin-top:18px;">
+            <a class="btn btn-outline" href="https://www.youtube.com/watch?v=4ILfhN7w7qg"
+               target="_blank" rel="noopener">▶ Watch preview on YouTube</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> &middot; Project Portfolio
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Graceful placeholder when an image file isn't present yet.
+    function imgFallback(img) {
+      const ph = document.createElement('div');
+      ph.className = 'img-placeholder';
+      ph.innerHTML = '🖼️ <strong>' + (img.dataset.label || 'Image') +
+        '</strong><br>尚未上傳 — 請新增檔案：<br><code>' + img.getAttribute('src') + '</code>';
+      img.replaceWith(ph);
+    }
+
+    // Simple slideshow for the OCAC project.
+    (function () {
+      const root = document.getElementById('ocac');
+      if (!root) return;
+      const slides = [...root.querySelectorAll('.slide')];
+      const dotsWrap = root.querySelector('.dots');
+      let i = 0;
+
+      slides.forEach((_, idx) => {
+        const d = document.createElement('button');
+        d.addEventListener('click', () => go(idx));
+        dotsWrap.appendChild(d);
+      });
+      const dots = [...dotsWrap.children];
+
+      function go(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      }
+      root.querySelector('.next').addEventListener('click', () => go(i + 1));
+      root.querySelector('.prev').addEventListener('click', () => go(i - 1));
+      go(0);
+    })();
+  </script>
+</body>
+</html>
