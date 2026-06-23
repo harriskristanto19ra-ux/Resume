@@ -1,49 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Harris Kristanto — Software & Systems</title>
+<meta name="description" content="Harris Kristanto (林壯熊) — Information Technology student who turns repetitive manual work into measured, automated systems. Taichung, Taiwan." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500;1,6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>document.documentElement.className += ' js';</script>
+<style>
+  :root{
+    --bg:#F7EFE4;          /* committed warm sand, carries the brand */
+    --bg-2:#EFE4D3;
+    --peach-1:#F6C98C;     /* deeper, more committed peach */
+    --peach-2:#F8DDB8;
+    --rust:#C9521F;        /* burnt-orange accent — confident, not pastel */
+    --rust-2:#A53F12;
+    --ink:#231C15;         /* deep warm ink */
+    --ink-soft:#5A5045;    /* AA on sand and on peach */
+    --line:#E0D2BD;
+    --line-2:#CDBA9E;
+    --white:#FFFDFA;
+
+    --f-name:"Archivo", system-ui, sans-serif;
+    --f-serif:"Bodoni Moda", Georgia, serif;
+    --f-body:"Hanken Grotesk", system-ui, sans-serif;
+
+    --maxw:1140px;
+
+    --z-sticky:100;
+    --z-skip:200;
+
+    --ease:cubic-bezier(.22,1,.36,1); /* ease-out-quint */
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--rust);color:#fff}
+  :focus-visible{outline:2px solid var(--rust);outline-offset:3px;border-radius:4px}
+  p{text-wrap:pretty}
+  h1,h2,h3{text-wrap:balance}
+
+  .skip{position:absolute;left:-9999px;background:var(--ink);color:#fff;padding:10px 16px;z-index:var(--z-skip)}
+  .skip:focus{left:8px;top:8px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,32px)}
+
+  /* ---------- NAV ---------- */
+  .nav{position:sticky;top:0;z-index:var(--z-sticky);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  .nav.scrolled{border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px;max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,32px)}
+  .logo{font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:25px;letter-spacing:.01em}
+  .logo b{font-style:normal;color:var(--rust)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{font-size:15px;color:var(--ink-soft);transition:color .2s;position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--rust);transition:width .25s var(--ease)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+  .btn-contact{background:var(--ink);color:#fff;padding:11px 24px;border-radius:40px;font-size:14px;font-weight:600;transition:transform .25s var(--ease),background .25s}
+  .btn-contact:hover{background:var(--rust-2);transform:translateY(-2px)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .btn-lang{font-family:var(--f-body);font-weight:600;font-size:13.5px;color:var(--ink);background:transparent;border:1px solid var(--line-2);padding:9px 14px;border-radius:40px;cursor:pointer;letter-spacing:.02em;line-height:1;display:inline-flex;align-items:center;gap:7px;transition:border-color .2s,background .2s,transform .25s var(--ease)}
+  .btn-lang::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rust)}
+  .btn-lang:hover{border-color:var(--rust);background:var(--white);transform:translateY(-1px)}
+  html[lang="zh-Hant"] .serif-hey,html[lang="zh-Hant"] .serif-there,html[lang="zh-Hant"] .kicker,html[lang="zh-Hant"] .name{letter-spacing:0}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(110% 75% at 50% -10%, color-mix(in srgb,var(--rust) 22%,transparent) 0%, transparent 52%),
+      linear-gradient(180deg, var(--peach-1) 0%, var(--peach-2) 24%, var(--bg) 70%);
+    overflow:hidden;
+  }
+  .stage{position:relative;max-width:960px;margin:0 auto;padding:46px clamp(20px,5vw,32px) 60px;min-height:660px}
+
+  .serif-hey,.serif-there{font-family:var(--f-serif);font-style:italic;font-weight:500;font-size:clamp(50px,8.5vw,96px);line-height:1;color:var(--ink);position:absolute;top:46px;z-index:3}
+  .serif-hey{left:0}
+  .serif-there{right:0}
+
+  .photo-wrap{position:relative;width:min(48%,344px);margin:62px auto 0;z-index:2}
+  .photo{
+    position:relative;width:100%;aspect-ratio:3/3.6;border-radius:172px 172px 26px 26px;
+    background:linear-gradient(165deg,var(--white),var(--bg-2));
+    border:1px solid rgba(255,255,255,.65);
+    box-shadow:0 34px 64px -30px rgba(120,70,20,.55);
+    overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  }
+  /* To use a real photo: add  background:url('your-photo.jpg') center/cover;  to .photo and remove .photo-mono + .photo-hint */
+  .photo-mono{font-family:var(--f-name);font-weight:900;font-size:clamp(58px,9vw,100px);color:var(--peach-1);letter-spacing:-.04em}
+  .photo-hint{font-size:12.5px;color:var(--ink-soft);font-family:var(--f-serif);font-style:italic;margin-top:4px;padding:0 28px}
+
+  .pill{position:absolute;left:0;top:296px;z-index:4;display:inline-flex;align-items:center;gap:9px;background:var(--white);border:1px solid var(--line);padding:9px 16px 9px 14px;border-radius:40px;font-size:13.5px;font-weight:600;box-shadow:0 10px 24px -12px rgba(120,70,20,.4)}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:#1F9D55;box-shadow:0 0 0 4px rgba(31,157,85,.2)}
+  .spec{position:absolute;right:0;top:296px;z-index:4;max-width:196px;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+
+  .name{position:absolute;left:0;bottom:32px;z-index:4;font-family:var(--f-name);font-weight:800;font-size:clamp(40px,7vw,82px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+  .name .cn{display:block;font-family:var(--f-serif);font-style:italic;font-weight:500;font-size:.3em;letter-spacing:0;color:var(--rust-2);text-transform:none;margin-top:12px}
+  .role{position:absolute;right:0;bottom:38px;z-index:4;text-align:right;font-family:var(--f-name);font-weight:800;font-size:clamp(20px,2.9vw,33px);line-height:1.04;letter-spacing:-.02em;text-transform:uppercase}
+
+  /* hero load choreography (resting state is visible; animation only enriches) */
+  @media (prefers-reduced-motion:no-preference){
+    .js .serif-hey,.js .serif-there,.js .photo-wrap,.js .pill,.js .spec,.js .name,.js .role{
+      animation:rise .9s var(--ease) both;
+    }
+    .js .serif-hey{animation-delay:.05s}
+    .js .serif-there{animation-delay:.13s}
+    .js .photo-wrap{animation-delay:.0s}
+    .js .pill{animation-delay:.34s}
+    .js .spec{animation-delay:.4s}
+    .js .name{animation-delay:.22s}
+    .js .role{animation-delay:.28s}
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+  /* ---------- section frame ---------- */
+  section{padding:clamp(64px,9vw,108px) 0}
+  .head{max-width:var(--maxw);margin:0 auto;text-align:center}
+  .kicker{font-family:var(--f-name);font-weight:800;font-size:clamp(28px,4.6vw,50px);letter-spacing:-.025em;line-height:1.02;text-transform:uppercase}
+  .kicker em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--rust-2);text-transform:none}
+  .sub{color:var(--ink-soft);max-width:56ch;margin:16px auto 0;font-size:17px}
+  .more{text-align:center;margin-top:clamp(30px,4vw,46px)}
+
+  /* ---------- RECENT WORK ---------- */
+  .proj-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:24px;margin-top:clamp(36px,5vw,56px)}
+  .pcard{background:var(--white);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+  .pcard:hover{transform:translateY(-6px);box-shadow:0 30px 56px -34px rgba(120,70,20,.55)}
+  .pvis{background:linear-gradient(150deg,#FAE3C4,#F2D2AC);padding:32px;min-height:300px;display:flex;align-items:center;justify-content:center}
+  .pbody{padding:26px 28px 30px}
+  .pbody .t{font-family:var(--f-name);font-weight:700;font-size:21px;letter-spacing:-.01em}
+  .pbody .d{color:var(--ink-soft);font-size:15px;margin-top:8px;line-height:1.55}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .tags span{font-size:12.5px;background:var(--bg);border:1px solid var(--line);padding:5px 11px;border-radius:20px;color:var(--ink-soft)}
+
+  .mock{width:100%;max-width:380px;background:#fff;border-radius:14px;box-shadow:0 20px 42px -26px rgba(120,70,20,.55);overflow:hidden}
+  .mock-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;background:#FBF4EA;border-bottom:1px solid var(--line)}
+  .mock-bar i{width:9px;height:9px;border-radius:50%;background:#E0D2BD}
+  .mock-bar .ttl{margin-left:8px;font-size:11px;color:var(--ink-soft);font-weight:600}
+  .mock-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mock-kpi{background:#FBF4EA;border-radius:10px;padding:12px}
+  .mock-kpi .n{font-family:var(--f-name);font-weight:800;font-size:23px;color:var(--rust-2)}
+  .mock-kpi .l{font-size:10px;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+  .mock-chart{grid-column:1/3;background:#FBF4EA;border-radius:10px;padding:14px 12px 10px;display:flex;align-items:flex-end;gap:8px;height:118px}
+  .mock-chart .b{flex:1;background:linear-gradient(var(--rust),#EE9A52);border-radius:5px 5px 0 0}
+
+  .phone{width:152px;height:300px;background:#fff;border-radius:30px;border:8px solid var(--ink);box-shadow:0 24px 46px -24px rgba(0,0,0,.5);overflow:hidden;position:relative}
+  .phone .scr{position:absolute;inset:0;background:linear-gradient(180deg,#FAE3C4,#fff);padding:24px 16px}
+  .phone .ring{width:90px;height:90px;border-radius:50%;border:11px solid #F0DCBE;border-top-color:var(--rust);margin:16px auto 0;display:flex;align-items:center;justify-content:center;font-family:var(--f-name);font-weight:800;color:var(--rust-2)}
+  .phone .ln{height:9px;background:#F0E5D2;border-radius:5px;margin:14px 10px}
+  .phone .ln.s{width:60%}
+
+  /* ---------- SERVICES (numbered — a real set of four offerings) ---------- */
+  .services{background:var(--white)}
+  .svc-grid{--gap:clamp(30px,4vw,54px);display:grid;grid-template-columns:repeat(4,1fr);column-gap:var(--gap);margin-top:clamp(36px,5vw,56px);padding-top:36px;border-top:1px solid var(--line)}
+  .svc{position:relative}
+  .svc:not(:first-child)::before{content:"";position:absolute;top:-36px;bottom:0;left:calc(var(--gap) / -2);width:1px;background:var(--line)}
+  .svc .no{font-family:var(--f-serif);font-style:italic;font-size:19px;color:var(--line-2);margin-bottom:44px}
+  .svc h3{font-family:var(--f-name);font-weight:700;font-size:19px;letter-spacing:-.01em;margin-bottom:10px}
+  .svc p{font-size:14.5px;color:var(--ink-soft);line-height:1.55}
+
+  /* ---------- VISION + STATS ---------- */
+  .vision-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(34px,6vw,64px);align-items:center}
+  .vision h2{font-family:var(--f-name);font-weight:800;font-size:clamp(28px,4.2vw,46px);letter-spacing:-.025em;line-height:1.03;margin-bottom:16px}
+  .vision h2 em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--rust-2);text-transform:none}
+  .vision p{color:var(--ink-soft);max-width:44ch}
+  .stat-row{display:flex;gap:clamp(28px,5vw,48px);margin-top:38px}
+  .stat .n{font-family:var(--f-name);font-weight:800;font-size:clamp(38px,5.6vw,58px);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+  .stat .n b{color:var(--rust)}
+  .stat .l{font-size:13.5px;color:var(--ink-soft);margin-top:8px;line-height:1.4}
+  .vision-vis{background:linear-gradient(150deg,#FAE3C4,#EFCDA2);border-radius:26px;padding:40px;display:flex;align-items:center;justify-content:center;min-height:340px}
+
+  /* ---------- ENGLISH / TOEIC credential ---------- */
+  .cert{display:grid;grid-template-columns:1.1fr 1fr 1fr;margin-top:clamp(36px,5vw,52px);border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--white)}
+  .cert-score{background:linear-gradient(160deg,var(--peach-2),var(--peach-1));padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;justify-content:center}
+  .cert-score .big{font-family:var(--f-name);font-weight:900;font-size:clamp(56px,8vw,92px);line-height:.86;letter-spacing:-.04em;color:var(--ink)}
+  .cert-score .big span{font-size:.32em;font-weight:700;color:var(--rust-2);letter-spacing:0;margin-left:.12em}
+  .cert-score .lbl{font-weight:600;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:16px}
+  .fact{padding:clamp(28px,3.4vw,44px);border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  .fact .k{font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rust-2)}
+  .fact .v{font-family:var(--f-name);font-weight:700;font-size:clamp(18px,2vw,21px);letter-spacing:-.01em;margin:10px 0 8px}
+  .fact p{font-size:14px;color:var(--ink-soft);line-height:1.55}
+  @media (max-width:760px){
+    .cert{grid-template-columns:1fr}
+    .fact{border-left:0;border-top:1px solid var(--line)}
+  }
+
+  /* ---------- EXPERIENCE (its own section, narrative rows) ---------- */
+  .experience{background:var(--bg-2)}
+  .xp{max-width:920px;margin:clamp(36px,5vw,52px) auto 0}
+  .xp-row{display:grid;grid-template-columns:200px 1fr;gap:clamp(20px,4vw,46px);padding:34px 0;border-top:1px solid var(--line-2)}
+  .xp-row:first-child{border-top:0}
+  .xp-when{font-family:var(--f-name);font-weight:700;font-size:15px;color:var(--ink);letter-spacing:.01em}
+  .xp-when .now{display:inline-block;margin-top:8px;font-family:var(--f-body);font-weight:600;font-size:12px;color:var(--rust-2);background:color-mix(in srgb,var(--rust) 14%,transparent);padding:3px 10px;border-radius:20px}
+  .xp-where{font-family:var(--f-body);font-weight:400;font-size:13px;color:var(--ink-soft);margin-top:10px}
+  .xp h3{font-family:var(--f-name);font-weight:700;font-size:21px;letter-spacing:-.01em}
+  .xp .org{color:var(--rust-2);font-weight:700}
+  .xp .cn{color:var(--ink-soft);font-weight:500;font-size:.86em}
+  .xp ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:11px}
+  .xp li{position:relative;padding-left:24px;font-size:15.5px;line-height:1.55;color:var(--ink)}
+  .xp li::before{content:"";position:absolute;left:2px;top:.6em;width:8px;height:8px;background:var(--rust);border-radius:2px;transform:rotate(45deg)}
+
+  /* ---------- EDUCATION (distinct treatment — two feature panels) ---------- */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:clamp(36px,5vw,52px)}
+  .edu{background:var(--white);border:1px solid var(--line);border-radius:24px;padding:clamp(26px,3vw,38px);position:relative;overflow:hidden}
+  .edu::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--rust),var(--peach-1))}
+  .edu .yr{font-family:var(--f-body);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--rust-2)}
+  .edu h3{font-family:var(--f-name);font-weight:800;font-size:clamp(21px,2.4vw,26px);letter-spacing:-.02em;line-height:1.08;margin:12px 0 4px}
+  .edu .cnname{font-family:var(--f-serif);font-style:italic;font-size:17px;color:var(--ink-soft)}
+  .edu .deg{font-weight:700;font-size:16px;margin-top:14px}
+  .edu .loc{font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+  .edu p{font-size:15px;color:var(--ink-soft);margin-top:16px;line-height:1.55}
+  .edu .courses{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+  .edu .courses span{font-size:12.5px;background:var(--bg);border:1px solid var(--line);padding:5px 11px;border-radius:20px;color:var(--ink)}
+
+  /* ---------- WORKSTATION ---------- */
+  .work{background:var(--white)}
+  .tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:clamp(36px,5vw,52px)}
+  .tool{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:26px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .tool:hover{transform:translateY(-5px);box-shadow:0 26px 48px -34px rgba(120,70,20,.55)}
+  .tool .ic{font-family:var(--f-name);font-weight:900;font-size:24px;color:var(--rust);width:52px;height:52px;border-radius:14px;background:var(--white);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .tool h4{font-family:var(--f-name);font-weight:700;font-size:16px}
+  .tool p{font-size:13.5px;color:var(--ink-soft);margin-top:4px}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--ink);color:#F1E7D8;text-align:center;border-radius:clamp(28px,5vw,46px) clamp(28px,5vw,46px) 0 0;margin-top:30px}
+  .contact h2{font-family:var(--f-name);font-weight:800;font-size:clamp(34px,6vw,64px);letter-spacing:-.025em;line-height:1.02;max-width:18ch;margin:0 auto 16px}
+  .contact h2 em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--peach-1);text-transform:none}
+  .contact .csub{color:#C7B6A0;max-width:46ch;margin:0 auto 40px;line-height:1.6}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta{padding:15px 30px;border-radius:40px;font-weight:600;font-size:15px;transition:transform .25s var(--ease)}
+  .cta.primary{background:var(--rust);color:#fff}
+  .cta.ghost{border:1px solid #4A3F32;color:#F1E7D8}
+  .cta:hover{transform:translateY(-2px)}
+  .contact .small{margin-top:46px;font-size:13px;color:#8C7C66;letter-spacing:.03em}
+
+  footer{background:var(--ink);color:#8C7C66;text-align:center;padding:26px 0;font-size:13px;letter-spacing:.03em}
+
+  /* ---------- scroll reveal (only when JS present; default visible) ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .js .rv.in{opacity:1;transform:none}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .stage{min-height:0;padding:24px 4px 44px;text-align:center}
+    .serif-hey,.serif-there{position:static;display:inline-block}
+    .photo-wrap{width:min(74%,290px);margin:16px auto 0}
+    .pill,.spec,.name,.role{position:static}
+    .pill{margin:28px auto 0;display:inline-flex}
+    .spec{max-width:none;margin:18px auto 0}
+    .name{font-size:clamp(40px,12vw,64px);margin-top:34px}
+    .role{margin-top:18px;text-align:center;font-size:clamp(20px,5.5vw,30px)}
+    .proj-grid{grid-template-columns:1fr}
+    .svc-grid{grid-template-columns:1fr 1fr;padding-top:32px}
+    .svc:not(:first-child)::before{display:none}
+    .svc:nth-child(2n)::before{content:"";display:block;position:absolute;top:0;bottom:0;left:calc(var(--gap) / -2);width:1px;background:var(--line)}
+    .svc:nth-child(n+3){margin-top:30px;padding-top:30px;border-top:1px solid var(--line)}
+    .svc:nth-child(n+3)::before{top:30px}
+    .svc .no{margin-bottom:18px}
+    .vision-grid{grid-template-columns:1fr}
+    .xp-row{grid-template-columns:1fr;gap:14px}
+    .edu-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:480px){
+    .svc-grid{grid-template-columns:1fr;padding-top:30px}
+    .svc:not(:first-child)::before,.svc:nth-child(2n)::before{display:none}
+    .svc:nth-child(n+3){margin-top:0}
+    .svc:not(:first-child){margin-top:28px;padding-top:28px;border-top:1px solid var(--line)}
+    .svc .no{margin-bottom:14px}
+    .stat-row{flex-direction:column;gap:24px}
+  }
+</style>
 </head>
 <body>
-  <header class="hero">
-    <div class="container">
-      <nav class="hero-nav">
-        <div class="brand">PORTFOLIO<span>.</span></div>
-        <a class="btn btn-ghost" href="projects.html">Projects &rarr;</a>
-      </nav>
+<a class="skip" href="#work">Skip to content</a>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">Harris<b>.</b></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#work" data-zh="作品">Work</a>
+      <a href="#about" data-zh="關於">About</a>
+      <a href="#experience" data-zh="經歷">Experience</a>
+      <a href="#education" data-zh="學歷">Education</a>
+      <a href="#contact" data-zh="聯絡">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button type="button" class="btn-lang" id="lang-toggle" aria-label="切換為繁體中文">中文</button>
+      <a href="#contact" class="btn-contact" data-zh="與我聯絡">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="stage">
+    <span class="serif-hey" data-zh="嗨，">Hey,</span>
+    <span class="serif-there" data-zh="你好">there</span>
+
+    <div class="photo-wrap">
+      <!-- Swap in a headshot: add  background:url('your-photo.jpg') center/cover  to .photo and remove the two lines below -->
+      <div class="photo">
+        <div class="photo-mono">HK</div>
+        <div class="photo-hint">Drop your headshot here</div>
+      </div>
     </div>
 
-    <div class="container hero-body">
-      <span class="eyebrow">AI&nbsp;&middot;&nbsp;Automation&nbsp;&middot;&nbsp;Data&nbsp;Visualization</span>
-      <h1>Turning manual work into <em>automated insight</em>.</h1>
-      <p class="lead">
-        A collection of projects where AI-assisted tools cut hours of repetitive
-        work down to minutes — from factory non-conformance reporting to
-        education promotion and music creation.
-      </p>
+    <span class="pill"><span class="dot"></span> <span data-zh="正在尋找新機會">Available for new opportunities</span></span>
+    <p class="spec" data-zh="專長於資料自動化、儀表板，以及重視品質的軟體開發。">Specialized in data automation, dashboards &amp; quality-driven software.</p>
 
-      <div class="hero-actions">
-        <!-- The button that takes you to page 2 -->
-        <a class="btn btn-primary" href="projects.html">View Projects &rarr;</a>
-        <a class="btn btn-ghost" href="#about">Learn more</a>
+    <h1 class="name" data-zh="我是<br>林壯熊<span class='cn'>Harris · Kristanto</span>">I am<br>Harris<span class="cn">林壯熊 · Kristanto</span></h1>
+    <p class="role" data-zh="軟體<br>與系統">Software<br>&amp; Systems</p>
+  </div>
+</section>
+
+<!-- ===== RECENT WORK ===== -->
+<section id="work">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="kicker" data-zh="近期<em>作品</em>">Recent <em>work</em></h2>
+      <p class="sub" data-zh="作品不多，但有一個系統我不斷回頭打磨。">A small body of work, with one system I keep coming back to.</p>
+    </div>
+    <div class="proj-grid">
+      <article class="pcard rv">
+        <div class="pvis">
+          <div class="mock" aria-hidden="true">
+            <div class="mock-bar"><i></i><i></i><i></i><span class="ttl">Scrap Reporting Dashboard — weekly</span></div>
+            <div class="mock-body">
+              <div class="mock-kpi"><div class="n">96%</div><div class="l">Time saved</div></div>
+              <div class="mock-kpi"><div class="n">&lt;5m</div><div class="l">Run time</div></div>
+              <div class="mock-chart">
+                <span class="b" style="height:40%"></span><span class="b" style="height:72%"></span>
+                <span class="b" style="height:55%"></span><span class="b" style="height:90%"></span>
+                <span class="b" style="height:48%"></span><span class="b" style="height:66%"></span>
+                <span class="b" style="height:80%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pbody">
+          <div class="t" data-zh="AI 驅動的不良品（報廢）儀表板">AI-Powered Non-Conformance Dashboard</div>
+          <p class="d" data-zh="一支單頁網頁應用程式，讀取 T100 ERP 每週匯出的 Excel，自動產生互動式管理儀表板——呈現每日報廢趨勢，以及依產品、部門與不良原因的前十名分析。將每週兩小時的工作縮短到五分鐘以內。">A single-page web app that ingests weekly Excel exports from the T100 ERP and auto-builds an interactive management dashboard — daily scrap trends and Top-10 breakdowns by product, department, and defect reason. Cut a two-hour weekly task to under five minutes.</p>
+          <div class="tags"><span>HTML SPA</span><span>JavaScript</span><span>Chart.js</span><span>SheetJS</span><span>AI-assisted</span></div>
+        </div>
+      </article>
+
+      <article class="pcard rv">
+        <div class="pvis">
+          <div class="phone" aria-hidden="true">
+            <div class="scr">
+              <div class="ring">FQC</div>
+              <div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="ln s"></div>
+            </div>
+          </div>
+        </div>
+        <div class="pbody">
+          <div class="t" data-zh="實務中的品質檢驗">Quality inspection, in practice</div>
+          <p class="d" data-zh="日常品質檢驗橫跨三道關卡——進料、製程與最終——使用游標卡尺、2.5D 影像量測系統與藍牙連線量測（Sylcom）。這是軟體背後的紀律。">Day-to-day QA across three gates — incoming, in-process, and final — using calipers, 2.5D vision systems, and Bluetooth gauging (Sylcom). The discipline behind the software.</p>
+          <div class="tags"><span>IQC · PQC · FQC</span><span>2.5D Vision</span><span>Sylcom</span></div>
+        </div>
+      </article>
+    </div>
+    <div class="more"><a class="btn-contact" href="projects.html" data-zh="查看完整案例研究 →">See the case studies &rarr;</a></div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="about">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="kicker" data-zh="我能<em>幫你的</em>">I can help <em>you with</em></h2>
+      <p class="sub" data-zh="我擅長的四件事——從試算表到生產線。">Four things I do well — from the spreadsheet to the shop floor.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc rv">
+        <div class="no">01</div>
+        <h3 data-zh="資料自動化">Data Automation</h3>
+        <p data-zh="把每週重複的試算表流程，變成會自動更新的工具——不必再每週手動複製貼上。">Turn repetitive spreadsheet routines into tools that update themselves — no more manual copy-paste every week.</p>
       </div>
-
-      <div class="hero-stats" id="about">
-        <div class="stat"><strong>3</strong><span>Featured projects</span></div>
-        <div class="stat"><strong>96%</strong><span>Time saved on reporting</span></div>
-        <div class="stat"><strong>5&nbsp;min</strong><span>From data to dashboard</span></div>
+      <div class="svc rv">
+        <div class="no">02</div>
+        <h3 data-zh="儀表板與報表">Dashboards &amp; Reporting</h3>
+        <p data-zh="用互動式儀表板讓原始的廠區資料一目了然——趨勢、分析與可直接呈給管理層的表格。">Interactive dashboards that make raw plant data legible — trends, breakdowns, and tables ready for management.</p>
+      </div>
+      <div class="svc rv">
+        <div class="no">03</div>
+        <h3 data-zh="品質保證">Quality Assurance</h3>
+        <p data-zh="依規格進行檢驗與量測，涵蓋 IQC、PQC 與 FQC，搭配精密工具與量測軟體。">Inspection and measurement to spec across IQC, PQC, and FQC, with precision tools and gauging software.</p>
+      </div>
+      <div class="svc rv">
+        <div class="no">04</div>
+        <h3 data-zh="Java 應用程式">Java Applications</h3>
+        <p data-zh="以 Java（Swing / AWT）打造桌面應用程式，建立在清晰的物件導向核心，並以演算法與資料結構為基礎。">Desktop apps built with Java (Swing / AWT) on a clean object-oriented core, grounded in algorithms &amp; data structures.</p>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <footer>
-    &copy; <span id="year"></span> &middot; Project Portfolio &middot; Built with HTML &amp; CSS
-  </footer>
+<!-- ===== VISION + STATS ===== -->
+<section class="vision">
+  <div class="wrap">
+    <div class="vision-grid">
+      <div class="rv">
+        <h2 data-zh="把人工作業，轉化為<em>可量化的成果。</em>">Turning manual work into <em>measured results.</em></h2>
+        <p data-zh="我大部分的開發，都是從工廠現場開始的——在那裡，成果必須精確，而且要真的幫別人省下時間，才算數。">Most of my building started on a factory floor — where a result only counts if it's exact and it actually gives someone their time back.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="n"><b>96</b>%</div><div class="l" data-zh="每週報表<br>節省工時">Weekly reporting<br>time removed</div></div>
+          <div class="stat"><div class="n">3</div><div class="l" data-zh="會說的<br>語言">Languages<br>spoken</div></div>
+          <div class="stat"><div class="n" data-zh="5<b>年</b>">5<b>yr</b></div><div class="l" data-zh="連任班級<br>代表">Elected class<br>representative</div></div>
+        </div>
+      </div>
+      <div class="vision-vis rv">
+        <div class="mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i><span class="ttl">Top-10 defect breakdown</span></div>
+          <div class="mock-body">
+            <div class="mock-chart" style="grid-column:1/3;height:152px">
+              <span class="b" style="height:95%"></span><span class="b" style="height:74%"></span>
+              <span class="b" style="height:60%"></span><span class="b" style="height:52%"></span>
+              <span class="b" style="height:44%"></span><span class="b" style="height:38%"></span>
+              <span class="b" style="height:30%"></span><span class="b" style="height:24%"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<!-- ===== ENGLISH / TOEIC ===== -->
+<section id="english">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="kicker" data-zh="英語，<em>有憑有據</em>">English, <em>certified</em></h2>
+      <p class="sub" data-zh="不只是履歷上的一行字——有分數作為佐證。">Not just a line on a résumé — a score that backs it up.</p>
+    </div>
+    <div class="cert rv">
+      <div class="cert-score">
+        <div class="big">910<span>/ 990</span></div>
+        <div class="lbl" data-zh="多益 TOEIC · 聽力與閱讀">TOEIC · Listening &amp; Reading</div>
+      </div>
+      <div class="fact">
+        <div class="k" data-zh="能力分級">Proficiency band</div>
+        <div class="v" data-zh="最高等級 · 860+">Highest tier · 860+</div>
+        <p data-zh="落在多益能力量表的最高分級——能在各種專業情境中有效溝通。">Sits in the top band of TOEIC&#39;s proficiency scale — effective communication across professional settings.</p>
+      </div>
+      <div class="fact">
+        <div class="k" data-zh="實際運用">In practice</div>
+        <div class="v" data-zh="可直接上工的英語">Work-ready English</div>
+        <p data-zh="能輕鬆閱讀規格文件、撰寫品保紀錄，並運用英語工具與 AI 助手進行開發。">Comfortable reading specs, documenting QA, and building with English-language tools and AI assistants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="experience" id="experience">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="kicker" data-zh="我的<em>工作經歷</em>">Where I've <em>worked</em></h2>
+    </div>
+    <div class="xp">
+      <div class="xp-row rv">
+        <div class="xp-when">
+          <span data-zh="2024年7月 — 至今">Jul 2024 — Present</span>
+          <span class="now" data-zh="目前">Current</span>
+          <div class="xp-where" data-zh="台灣台中市外埔區">Waipu District, Taichung, Taiwan</div>
+        </div>
+        <div>
+          <h3 data-zh="品質保證實習生 · <span class='org'>VP Components</span> <span class='cn'>鋐光實業</span>">Quality Assurance Intern · <span class="org">VP Components</span> <span class="cn">鋐光實業</span></h3>
+          <ul>
+            <li data-zh="獨立設計並打造一套 AI 輔助的資料處理系統，將每週全廠的不良品（報廢）報表自動化。">Independently designed and built an AI-assisted data-processing system that automated weekly plant-wide non-conformance (scrap) reporting.</li>
+            <li data-zh="執行進料（IQC）、製程（PQC）與最終（FQC）檢驗，使用游標卡尺、2.5D 影像量測系統與藍牙連線量測軟體（Sylcom）。">Run incoming (IQC), in-process (PQC), and final (FQC) inspections using calipers, 2.5D vision measuring systems, and Bluetooth-connected gauging software (Sylcom).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="xp-row rv">
+        <div class="xp-when">
+          <span data-zh="2021年11月 — 2024年6月">Nov 2021 — Jun 2024</span>
+          <div class="xp-where" data-zh="台灣台中市">Taichung, Taiwan</div>
+        </div>
+        <div>
+          <h3 data-zh="建教合作 品保實習生 · <span class='org'>Huei Tyng Enterprise</span> <span class='cn'>輝庭企業</span>">QA Intern, Work-Study · <span class="org">Huei Tyng Enterprise</span> <span class="cn">輝庭企業</span></h3>
+          <ul>
+            <li data-zh="完成為期三年的高中建教合作：先在生產線擔任作業員，之後兩年晉升至品質保證的職務。">Completed a three-year high-school work-study placement: started on the production line as an operator, then advanced to a quality-assurance role for the remaining two years.</li>
+            <li data-zh="依規格檢驗金屬收納與家用產品，記錄缺失並協助後續的改善追蹤。">Inspected metal storage and household products against specification, recording defects and supporting corrective follow-up.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="kicker" data-zh="我的<em>學歷</em>">Where I've <em>studied</em></h2>
+    </div>
+    <div class="edu-grid">
+      <article class="edu rv">
+        <div class="yr" data-zh="預計 2028 年畢業">Expected Graduation 2028</div>
+        <h3 data-zh="國立勤益科技大學">National Chin-Yi University of Technology</h3>
+        <div class="cnname" data-zh="National Chin-Yi University of Technology">國立勤益科技大學</div>
+        <div class="deg" data-zh="資訊科技學士">B.S. in Information Technology</div>
+        <div class="loc" data-zh="台灣台中市">Taichung, Taiwan</div>
+        <p data-zh="目前就讀二年級，參與國際建教合作專班。">Currently in my second year, enrolled in an international work-study program.</p>
+        <div class="courses"><span data-zh="Java 程式設計">Java Programming</span><span data-zh="離散數學與結構">Discrete Math &amp; Structures</span><span data-zh="物件導向程式設計">Object-Oriented Programming</span></div>
+      </article>
+      <article class="edu rv">
+        <div class="yr">2021 — 2024</div>
+        <h3 data-zh="青年高中">Youth Senior High School</h3>
+        <div class="cnname" data-zh="Youth Senior High School">青年高中</div>
+        <div class="deg" data-zh="電機科">Electrical Engineering</div>
+        <div class="loc" data-zh="台灣台中市">Taichung, Taiwan</div>
+        <p data-zh="三年制電機科技職課程，並同時完成製造業品保的建教合作。">Three-year vocational program in electrical engineering, completed alongside a work-study placement in manufacturing quality assurance.</p>
+        <div class="courses"><span data-zh="技職課程">Vocational track</span><span data-zh="建教合作">Work-study</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKSTATION ===== -->
+<section class="work">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="kicker" data-zh="我的<em>工作站</em>">My <em>workstation</em></h2>
+      <p class="sub" data-zh="我在寫程式與在現場時，最常用的工具。">The kit I reach for, in code and on the floor.</p>
+    </div>
+    <div class="tool-grid">
+      <div class="tool rv"><div class="ic">J</div><h4>Java</h4><p data-zh="Swing 與 AWT 桌面應用">Swing &amp; AWT desktop apps</p></div>
+      <div class="tool rv"><div class="ic">JS</div><h4>JavaScript</h4><p data-zh="單頁網頁應用">Single-page web apps</p></div>
+      <div class="tool rv"><div class="ic">⬡</div><h4>Chart.js</h4><p data-zh="資料視覺化">Data visualization</p></div>
+      <div class="tool rv"><div class="ic">▦</div><h4>SheetJS</h4><p data-zh="Excel / ERP 資料匯入">Excel / ERP ingestion</p></div>
+      <div class="tool rv"><div class="ic">&lt;/&gt;</div><h4>VS Code &amp; Eclipse</h4><p data-zh="寫程式的地方">Where the code happens</p></div>
+      <div class="tool rv"><div class="ic">⌖</div><h4 data-zh="精密工具">Precision tools</h4><p data-zh="游標卡尺 · 2.5D · Sylcom">Calipers · 2.5D · Sylcom</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 data-zh="一起打造能<em>自己運轉</em>的系統。">Let's build something that <em>runs itself.</em></h2>
+    <p class="csub" data-zh="正在尋找資訊科技與軟體開發的職缺，現居台灣台中。">Open to information technology and software development roles. Based in Taichung, Taiwan.</p>
+    <div class="cta-row">
+      <a class="cta primary" href="mailto:harriskristanto19ra@gmail.com" data-zh="寄信給我">Email me</a>
+      <a class="cta ghost" href="tel:+886903408982">+886 903 408 982</a>
+    </div>
+    <p class="small" data-zh="harriskristanto19ra@gmail.com · 台灣台中">harriskristanto19ra@gmail.com · Taichung, Taiwan</p>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Harris Kristanto · 林壯熊 — <span data-zh="純手工打造。">Built from scratch.</span></footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ----- language toggle (EN ⇄ Traditional Chinese) ----- */
+  var langNodes = Array.prototype.slice.call(document.querySelectorAll('[data-zh]'));
+  var enHTML = langNodes.map(function(el){ return el.innerHTML; });   // capture English once
+  var toggle = document.getElementById('lang-toggle');
+  function setLang(lang){
+    var zh = lang === 'zh';
+    document.documentElement.lang = zh ? 'zh-Hant' : 'en';
+    langNodes.forEach(function(el,i){
+      el.innerHTML = zh ? el.getAttribute('data-zh') : enHTML[i];
+    });
+    toggle.textContent = zh ? 'EN' : '中文';
+    toggle.setAttribute('aria-label', zh ? 'Switch to English' : '切換為繁體中文');
+    try{ localStorage.setItem('lang', lang); }catch(e){}
+  }
+  toggle.addEventListener('click', function(){
+    setLang(document.documentElement.lang === 'zh-Hant' ? 'en' : 'zh');
+  });
+  try{ if(localStorage.getItem('lang') === 'zh') setLang('zh'); }catch(e){}
+
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, {passive:true});
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if(reduce || !('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var sibs = Array.prototype.slice.call(e.target.parentNode.children).filter(function(n){return n.classList.contains('rv')});
+        var i = sibs.indexOf(e.target);
+        e.target.style.transitionDelay = (Math.max(0,i)*70) + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.14, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+
+  /* failsafe: if anything is still hidden shortly after load, reveal it */
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      els.forEach(function(el){ if(!el.classList.contains('in')){ el.classList.add('in'); } });
+    }, 2200);
+  });
+})();
+</script>
 </body>
 </html>
