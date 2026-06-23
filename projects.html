@@ -113,6 +113,34 @@
       border-radius:999px;padding:12px 24px;font-weight:600;font-size:.92rem}
     .btn-out:hover{border-color:var(--accent);color:var(--accent)}
 
+    /* clickable images + lightbox */
+    .zoom{cursor:zoom-in;transition:filter .2s ease,transform .2s ease}
+    .zoom:hover{filter:brightness(1.05)}
+    .shots .zoom:hover{transform:scale(1.01)}
+    .lb{position:fixed;inset:0;background:rgba(18,13,7,.93);backdrop-filter:blur(4px);
+      display:none;place-items:center;z-index:100}
+    .lb.open{display:grid}
+    body.lb-open{overflow:hidden}
+    .lb figure{margin:0;display:grid;place-items:center;gap:12px;max-width:94vw;max-height:92vh}
+    .lb img{max-width:94vw;max-height:84vh;object-fit:contain;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+    .lb figcaption{color:#f3e7d4;font-size:.9rem;text-align:center}
+    .lb-btn{position:absolute;background:rgba(255,255,255,.92);border:none;color:var(--ink);cursor:pointer;
+      width:46px;height:46px;border-radius:50%;font-size:1.5rem;line-height:1;display:grid;place-items:center;
+      box-shadow:0 6px 18px rgba(0,0,0,.25)}
+    .lb-btn:hover{background:#fff;transform:scale(1.06)}
+    .lb-close{top:18px;right:20px}
+    .lb-prev{left:18px;top:50%;transform:translateY(-50%)}
+    .lb-next{right:18px;top:50%;transform:translateY(-50%)}
+    .lb-prev:hover,.lb-next:hover{transform:translateY(-50%) scale(1.06)}
+    @media(max-width:720px){.lb-prev{left:8px}.lb-next{right:8px}}
+
+    /* back-to-top */
+    .top{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;
+      background:var(--ink);color:#fff;font-size:1.2rem;cursor:pointer;display:none;place-items:center;
+      box-shadow:var(--shadow);z-index:40}
+    .top.show{display:grid}
+    .top:hover{background:var(--accent)}
+
     footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.88rem;
       display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
@@ -182,12 +210,14 @@
 
         <div class="shots">
           <figure>
-            <img src="images/non-conform-dashboard.png" alt="Analysis dashboard"
+            <img class="zoom" loading="lazy" title="Click to enlarge"
+                 src="images/non-conform-dashboard.png" alt="Interactive non-conform dashboard"
                  data-label="Dashboard" onerror="ph(this)" />
             <figcaption>Interactive non-conform dashboard</figcaption>
           </figure>
           <figure>
-            <img src="images/non-conform-excel.png" alt="Source Excel export"
+            <img class="zoom" loading="lazy" title="Click to enlarge"
+                 src="images/non-conform-excel.png" alt="Raw weekly export from T100"
                  data-label="T100 Excel export" onerror="ph(this)" />
             <figcaption>Raw weekly export from T100</figcaption>
           </figure>
@@ -209,9 +239,9 @@
 
         <div class="show" id="ocac">
           <div class="stage">
-            <div class="slide on"><img src="images/ocac-1.jpg" alt="Slide 1" data-label="OCAC slide 1" onerror="ph(this)" /></div>
-            <div class="slide"><img src="images/ocac-2.jpg" alt="Slide 2" data-label="OCAC slide 2" onerror="ph(this)" /></div>
-            <div class="slide"><img src="images/ocac-3.jpg" alt="Slide 3" data-label="OCAC slide 3" onerror="ph(this)" /></div>
+            <div class="slide on"><img class="zoom" loading="lazy" title="Click to enlarge" src="images/ocac-1.jpg" alt="OCAC slide 1" data-label="OCAC slide 1" onerror="ph(this)" /></div>
+            <div class="slide"><img class="zoom" loading="lazy" title="Click to enlarge" src="images/ocac-2.jpg" alt="OCAC slide 2" data-label="OCAC slide 2" onerror="ph(this)" /></div>
+            <div class="slide"><img class="zoom" loading="lazy" title="Click to enlarge" src="images/ocac-3.jpg" alt="OCAC slide 3" data-label="OCAC slide 3" onerror="ph(this)" /></div>
           </div>
           <button class="arw l" aria-label="Previous">&lsaquo;</button>
           <button class="arw r" aria-label="Next">&rsaquo;</button>
@@ -233,7 +263,7 @@
         <p class="lead">Original tracks composed with Suno AI. Preview one below.</p>
 
         <div class="vid">
-          <iframe src="https://www.youtube.com/embed/4ILfhN7w7qg" title="Suno AI music preview"
+          <iframe src="https://www.youtube.com/embed/4ILfhN7w7qg" title="Suno AI music preview" loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="btn-line">
@@ -247,6 +277,16 @@
     <span>&copy; <span id="yr"></span> Portfolio</span>
     <a href="index.html">Back to home &rarr;</a>
   </footer>
+
+  <button class="top" id="top" aria-label="Back to top">&uarr;</button>
+
+  <!-- fullscreen image viewer -->
+  <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button class="lb-btn lb-close" aria-label="Close (Esc)">&times;</button>
+    <button class="lb-btn lb-prev" aria-label="Previous image">&lsaquo;</button>
+    <button class="lb-btn lb-next" aria-label="Next image">&rsaquo;</button>
+    <figure><img id="lb-img" src="" alt="" /><figcaption id="lb-cap"></figcaption></figure>
+  </div>
 
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
@@ -266,6 +306,36 @@
       const d=[...dw.children];
       function go(n){i=(n+s.length)%s.length;s.forEach((e,x)=>e.classList.toggle('on',x===i));d.forEach((e,x)=>e.classList.toggle('on',x===i))}
       r.querySelector('.r').onclick=()=>go(i+1);r.querySelector('.l').onclick=()=>go(i-1);go(0);
+      // touch swipe (mobile)
+      const st=r.querySelector('.stage');let sx=0;
+      st.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+      st.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(dx<0?i+1:i-1);});
+    })();
+
+    // fullscreen image viewer (lightbox)
+    (function(){
+      const lb=document.getElementById('lb'),im=document.getElementById('lb-img'),cap=document.getElementById('lb-cap');
+      const pics=()=>[...document.querySelectorAll('img.zoom')];let idx=0;
+      function paint(){const a=pics();if(!a.length)return;idx=(idx+a.length)%a.length;
+        const p=a[idx];im.src=p.currentSrc||p.src;im.alt=p.alt||'';cap.textContent=p.alt||'';}
+      function open(p){idx=pics().indexOf(p);lb.classList.add('open');document.body.classList.add('lb-open');
+        lb.setAttribute('aria-hidden','false');paint();}
+      function close(){lb.classList.remove('open');document.body.classList.remove('lb-open');
+        lb.setAttribute('aria-hidden','true');im.src='';}
+      document.addEventListener('click',e=>{const p=e.target.closest('img.zoom');if(p)open(p);});
+      lb.querySelector('.lb-close').onclick=close;
+      lb.querySelector('.lb-prev').onclick=e=>{e.stopPropagation();idx--;paint();};
+      lb.querySelector('.lb-next').onclick=e=>{e.stopPropagation();idx++;paint();};
+      lb.addEventListener('click',e=>{if(e.target===lb||e.target.tagName==='FIGURE')close();});
+      document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
+        if(e.key==='Escape')close();else if(e.key==='ArrowRight'){idx++;paint();}else if(e.key==='ArrowLeft'){idx--;paint();}});
+    })();
+
+    // back-to-top
+    (function(){
+      const b=document.getElementById('top');
+      addEventListener('scroll',()=>b.classList.toggle('show',scrollY>500),{passive:true});
+      b.onclick=()=>scrollTo({top:0,behavior:'smooth'});
     })();
   </script>
 </body>
