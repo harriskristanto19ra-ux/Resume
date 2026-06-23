@@ -1,364 +1,463 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selected Work</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@500;700;900&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet" />
-  <style>
-    :root{
-      --ink:#17140f; --muted:#7c6f5f; --accent:#ef7d2e; --accent-2:#f5a83f;
-      --cream:#fff8ee; --line:rgba(23,20,15,.12);
-      --card:rgba(255,255,255,.72); --shadow:0 18px 50px rgba(120,80,20,.14);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:"Inter","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-      color:var(--ink); line-height:1.55;
-      background:
-        radial-gradient(1100px 640px at 78% -8%, #ffe2b6 0%, rgba(255,226,182,0) 60%),
-        radial-gradient(900px 700px at 5% 8%, #ffeccf 0%, rgba(255,236,207,0) 55%),
-        linear-gradient(180deg,#fffaf3 0%,#fff8ef 100%);
-      background-attachment:fixed; -webkit-font-smoothing:antialiased;
-    }
-    .wrap{width:min(1240px,93vw);margin:0 auto}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .serif{font-family:"Playfair Display",Georgia,serif;font-style:italic}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Harris Kristanto — Case Studies</title>
+<meta name="description" content="Case studies by Harris Kristanto (林壯熊) — a non-conformance reporting system, an education-outreach slideshow, and an AI music experiment." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500;1,6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>document.documentElement.className += ' js';</script>
+<style>
+  :root{
+    --bg:#F7EFE4; --bg-2:#EFE4D3;
+    --peach-1:#F6C98C; --peach-2:#F8DDB8;
+    --rust:#C9521F; --rust-2:#A53F12;
+    --ink:#231C15; --ink-soft:#5A5045;
+    --line:#E0D2BD; --line-2:#CDBA9E; --white:#FFFDFA;
 
-    /* nav */
-    nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
-      background:rgba(255,250,243,.7);border-bottom:1px solid var(--line)}
-    .nav-in{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:14px}
-    .brand{font-family:"Playfair Display",serif;font-style:italic;font-size:1.4rem;font-weight:600}
-    .nav-links{display:flex;gap:28px;font-size:.92rem;font-weight:500}
-    .nav-links a{color:var(--muted)}
-    .nav-links a:hover{color:var(--ink)}
-    .nav-right{display:flex;align-items:center;gap:12px}
-    .pill{background:var(--ink);color:#fff;padding:10px 22px;border-radius:999px;font-weight:600;font-size:.9rem;
-      transition:transform .15s ease}
-    .pill:hover{transform:translateY(-2px)}
-    .lang{background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 16px;
-      font-weight:600;font-size:.85rem;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s ease}
-    .lang:hover{border-color:var(--accent);color:var(--accent)}
+    --f-name:"Archivo", system-ui, sans-serif;
+    --f-serif:"Bodoni Moda", Georgia, serif;
+    --f-body:"Hanken Grotesk", system-ui, sans-serif;
 
-    /* hero */
-    header.hero{padding:78px 0 44px}
-    .avail{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);
-      border-radius:999px;padding:7px 16px;font-size:.82rem;font-weight:600;box-shadow:var(--shadow);margin-bottom:26px}
-    .avail i{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(239,125,46,.18)}
-    .hero h1{font-family:"Archivo",sans-serif;font-weight:900;letter-spacing:-.03em;line-height:.92;
-      font-size:clamp(3rem,11vw,7rem);text-transform:uppercase}
-    .hero h1 .serif{text-transform:none;font-weight:500;color:var(--accent);display:block;
-      font-size:clamp(2rem,7vw,4.2rem);letter-spacing:0;margin-bottom:-.1em}
-    .hero p{margin-top:22px;max-width:48ch;color:var(--muted);font-size:1.08rem}
+    --maxw:1140px;
 
-    /* section */
-    .sec{padding:30px 0 26px}
-    .proj{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:46px;
-      box-shadow:var(--shadow);margin-bottom:36px;backdrop-filter:blur(6px)}
-    .proj-top{display:flex;align-items:flex-start;gap:22px;margin-bottom:24px}
-    .num{font-family:"Archivo",sans-serif;font-weight:800;font-size:2.8rem;color:transparent;
-      -webkit-text-stroke:1.5px rgba(23,20,15,.32);line-height:1}
-    .proj-top h3{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.75rem;letter-spacing:-.01em}
-    .proj-top .tag{margin-top:7px;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-    .lead{color:var(--muted);max-width:70ch;font-size:1.06rem}
+    --z-backtop:80;
+    --z-sticky:100;
+    --z-skip:200;
+    --z-modal:300;
 
-    /* before/after */
-    .ba{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin:30px 0 24px}
-    .ba .box{border-radius:20px;padding:30px;text-align:center;border:1px solid var(--line);background:#fffdf9}
-    .ba .box .lbl{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-    .ba .box .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:3.2rem;line-height:1;margin:10px 0 4px}
-    .ba .before .big{color:#b5573a}.ba .after .big{color:#2f8f5b}
-    .ba .box .sub{font-size:.9rem;color:var(--muted)}
-    .ba .mid{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--accent);font-weight:800}
-    .ba .mid .glyph{font-size:1.7rem}
-    .ba .mid .pct{background:var(--ink);color:#fff;font-size:.76rem;padding:5px 12px;border-radius:8px;white-space:nowrap}
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
 
-    .chips{display:flex;flex-wrap:wrap;gap:11px;margin-top:4px}
-    .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:.9rem;font-weight:500;color:var(--ink)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-    /* media — larger thumbnails */
-    .shots{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
-    .shots figure{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#fffdf9}
-    .shots img{width:100%;height:360px;object-fit:cover;object-position:top}
-    .shots figcaption{padding:13px 18px;font-size:.9rem;color:var(--muted)}
-    .ph{height:360px;display:grid;place-items:center;text-align:center;padding:18px;color:var(--muted);font-size:.86rem;
-      background:repeating-linear-gradient(45deg,#fbf4e8,#fbf4e8 12px,#f4ead7 12px,#f4ead7 24px)}
-    .ph code{font-size:.78rem;color:var(--accent)}
+  body{
+    font-family:var(--f-body); background:var(--bg); color:var(--ink);
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  a,button{touch-action:manipulation}
+  ::selection{background:var(--rust);color:#fff}
+  :focus-visible{outline:2px solid var(--rust);outline-offset:3px;border-radius:4px}
+  p{text-wrap:pretty}
+  h1,h2,h3{text-wrap:balance}
+  img{display:block;max-width:100%}
 
-    /* slideshow */
-    .show{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#2a2118;margin-top:8px}
-    .stage{position:relative;aspect-ratio:16/9}
-    .slide{position:absolute;inset:0;opacity:0;transition:opacity .4s ease;display:grid;place-items:center}
-    .slide.on{opacity:1}
-    .slide img{width:100%;height:100%;object-fit:contain}
-    .slide .ph{width:100%;height:100%}
-    .arw{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:none;
-      cursor:pointer;background:rgba(255,255,255,.9);color:var(--ink);font-size:1.4rem;display:grid;place-items:center}
-    .arw:hover{background:#fff}.arw.l{left:14px}.arw.r{right:14px}
-    .dots{display:flex;gap:8px;justify-content:center;padding:14px;background:#fffdf9}
-    .dots button{width:9px;height:9px;border-radius:50%;border:none;background:#d9cab2;cursor:pointer}
-    .dots button.on{background:var(--accent)}
+  .skip{position:absolute;left:-9999px;background:var(--ink);color:#fff;padding:10px 16px;z-index:var(--z-skip)}
+  .skip:focus{left:8px;top:8px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,32px)}
 
-    /* video */
-    .vid{position:relative;padding-top:56.25%;border-radius:22px;overflow:hidden;border:1px solid var(--line);margin-top:8px;background:#000}
-    .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .btn-line{margin-top:20px}
-    .btn-out{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);
-      border-radius:999px;padding:13px 26px;font-weight:600;font-size:.95rem}
-    .btn-out:hover{border-color:var(--accent);color:var(--accent)}
+  /* ---------- NAV (shared with home) ---------- */
+  .nav{position:sticky;top:0;z-index:var(--z-sticky);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  .nav.scrolled{border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px;max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,32px)}
+  .logo{font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:25px;letter-spacing:.01em}
+  .logo b{font-style:normal;color:var(--rust)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{font-size:15px;color:var(--ink-soft);transition:color .2s;position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--rust);transition:width .25s var(--ease)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+  .btn-contact{background:var(--ink);color:#fff;padding:11px 24px;border-radius:40px;font-size:14px;font-weight:600;transition:transform .25s var(--ease),background .25s}
+  .btn-contact:hover{background:var(--rust-2);transform:translateY(-2px)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .btn-lang{font-family:var(--f-body);font-weight:600;font-size:13.5px;color:var(--ink);background:transparent;border:1px solid var(--line-2);padding:9px 14px;border-radius:40px;cursor:pointer;letter-spacing:.02em;line-height:1;display:inline-flex;align-items:center;gap:7px;transition:border-color .2s,background .2s,transform .25s var(--ease)}
+  .btn-lang::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rust)}
+  .btn-lang:hover{border-color:var(--rust);background:var(--white);transform:translateY(-1px)}
+  html[lang="zh-Hant"] .kicker,html[lang="zh-Hant"] .ph-title,html[lang="zh-Hant"] .case-h{letter-spacing:0}
 
-    /* clickable images + lightbox */
-    .zoom{cursor:zoom-in;transition:filter .2s ease,transform .2s ease}
-    .zoom:hover{filter:brightness(1.05)}
-    .shots .zoom:hover{transform:scale(1.01)}
-    .lb{position:fixed;inset:0;background:rgba(18,13,7,.93);backdrop-filter:blur(4px);
-      display:none;place-items:center;z-index:100}
-    .lb.open{display:grid}
-    body.lb-open{overflow:hidden}
-    .lb figure{margin:0;display:grid;place-items:center;gap:12px;max-width:94vw;max-height:92vh}
-    .lb img{max-width:94vw;max-height:84vh;object-fit:contain;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
-    .lb figcaption{color:#f3e7d4;font-size:.9rem;text-align:center}
-    .lb-btn{position:absolute;background:rgba(255,255,255,.92);border:none;color:var(--ink);cursor:pointer;
-      width:46px;height:46px;border-radius:50%;font-size:1.5rem;line-height:1;display:grid;place-items:center;
-      box-shadow:0 6px 18px rgba(0,0,0,.25)}
-    .lb-btn:hover{background:#fff;transform:scale(1.06)}
-    .lb-close{top:18px;right:20px}
-    .lb-prev{left:18px;top:50%;transform:translateY(-50%)}
-    .lb-next{right:18px;top:50%;transform:translateY(-50%)}
-    .lb-prev:hover,.lb-next:hover{transform:translateY(-50%) scale(1.06)}
-    @media(max-width:720px){.lb-prev{left:8px}.lb-next{right:8px}}
+  /* ---------- PAGE HEADER ---------- */
+  .phead{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 50% -20%, color-mix(in srgb,var(--rust) 18%,transparent) 0%, transparent 55%),
+      linear-gradient(180deg, var(--peach-2) 0%, var(--bg) 72%);
+    padding:clamp(40px,7vw,76px) 0 clamp(48px,7vw,80px);
+  }
+  .back{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;color:var(--ink-soft);font-weight:600;transition:color .2s,gap .25s var(--ease)}
+  .back:hover{color:var(--rust-2);gap:12px}
+  .ph-eyebrow{display:block;font-family:var(--f-serif);font-style:italic;font-size:clamp(20px,3vw,27px);color:var(--rust-2);margin:clamp(26px,4vw,40px) 0 6px}
+  .ph-title{font-family:var(--f-name);font-weight:900;font-size:clamp(44px,8.5vw,92px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+  .ph-sub{color:var(--ink-soft);max-width:54ch;margin-top:18px;font-size:clamp(16px,2vw,18.5px)}
 
-    /* back-to-top */
-    .top{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;
-      background:var(--ink);color:#fff;font-size:1.2rem;cursor:pointer;display:none;place-items:center;
-      box-shadow:var(--shadow);z-index:40}
-    .top.show{display:grid}
-    .top:hover{background:var(--accent)}
+  /* ---------- CASES ---------- */
+  .case{padding:clamp(58px,8vw,104px) 0}
+  .case + .case{border-top:1px solid var(--line)}
+  .case.alt{background:var(--white)}
+  .case-label{font-family:var(--f-serif);font-style:italic;font-size:18px;color:var(--rust-2)}
+  .case-h{font-family:var(--f-name);font-weight:800;font-size:clamp(28px,4.6vw,50px);letter-spacing:-.025em;line-height:1.03;margin:10px 0 0;max-width:18ch}
+  .case-h em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--rust-2);text-transform:none}
+  .case-lead{color:var(--ink-soft);max-width:64ch;margin-top:18px;font-size:clamp(16px,1.9vw,18px)}
 
-    footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.88rem;
-      display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  /* from → to result strip (a real measured outcome, not a hero-metric) */
+  .fromto{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(16px,3vw,30px);align-items:center;
+    margin:clamp(30px,4vw,44px) 0 0;padding:clamp(26px,3.5vw,38px);background:var(--bg);border:1px solid var(--line);border-radius:24px}
+  .case.alt .fromto{background:var(--bg)}
+  .ft-cell{text-align:center}
+  .ft-cell .k{font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .ft-cell .v{font-family:var(--f-name);font-weight:900;font-size:clamp(40px,6.5vw,72px);line-height:.9;letter-spacing:-.04em;margin:10px 0 6px}
+  .ft-cell.to .v{color:var(--rust)}
+  .ft-cell .note{font-size:13.5px;color:var(--ink-soft)}
+  .ft-arrow{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--rust);font-size:26px;line-height:1}
+  .ft-arrow .pct{font-family:var(--f-body);font-weight:700;font-size:12.5px;color:#fff;background:var(--ink);padding:5px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.01em}
 
-    @media(max-width:720px){
-      .nav-links{display:none}
-      .proj{padding:30px}
-      .ba{grid-template-columns:1fr}.ba .mid{flex-direction:row}
-      .shots{grid-template-columns:1fr}
-      .shots img,.ph{height:300px}
-    }
-  </style>
+  .case-h3{font-family:var(--f-name);font-weight:700;font-size:18px;letter-spacing:-.01em;margin:clamp(34px,4vw,46px) 0 12px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .tags span{font-size:12.5px;background:var(--bg);border:1px solid var(--line);padding:6px 12px;border-radius:20px;color:var(--ink-soft)}
+  .case.alt .tags span{background:var(--white)}
+
+  .specs{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 30px;margin-top:8px}
+  .specs li{position:relative;padding-left:24px;font-size:15.5px;line-height:1.5;color:var(--ink)}
+  .specs li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;background:var(--rust);border-radius:2px;transform:rotate(45deg)}
+
+  /* gallery — larger image boxes, click to enlarge */
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);margin-top:clamp(28px,4vw,40px)}
+  .shots figure{background:var(--white);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+  .case.alt .shots figure{background:var(--bg)}
+  .shots figure:has(.zoom):hover{transform:translateY(-5px);box-shadow:0 30px 56px -34px rgba(120,70,20,.5)}
+  .shots img.zoom{width:100%;height:clamp(280px,36vw,420px);object-fit:cover;object-position:top;cursor:zoom-in}
+  .shots figcaption{padding:15px 20px;font-size:14px;color:var(--ink-soft)}
+  .ph{height:clamp(280px,36vw,420px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px;
+    background:repeating-linear-gradient(135deg,var(--bg),var(--bg) 14px,var(--bg-2) 14px,var(--bg-2) 28px);color:var(--ink-soft)}
+  .ph .g{font-family:var(--f-name);font-weight:900;font-size:30px;color:var(--line-2)}
+  .ph code{font-size:12.5px;color:var(--rust-2);background:var(--white);border:1px solid var(--line);padding:3px 9px;border-radius:8px}
+
+  /* slideshow */
+  .show{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:var(--ink);margin-top:clamp(24px,3.5vw,36px)}
+  .stage{position:relative;aspect-ratio:16/9}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity .5s var(--ease);display:flex;align-items:center;justify-content:center}
+  .slide.on{opacity:1}
+  .slide img.zoom{width:100%;height:100%;object-fit:contain;cursor:zoom-in}
+  .slide .ph{width:100%;height:100%}
+  .arw{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+    background:color-mix(in srgb,var(--white) 92%,transparent);color:var(--ink);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px -6px rgba(0,0,0,.4);transition:background .2s,transform .2s var(--ease)}
+  .arw:hover{background:var(--white);transform:translateY(-50%) scale(1.06)}
+  .arw.l{left:14px}.arw.r{right:14px}
+  .dots{display:flex;gap:9px;justify-content:center;padding:16px;background:var(--white)}
+  .dots button{width:9px;height:9px;border-radius:50%;border:none;background:var(--line-2);cursor:pointer;transition:background .2s,transform .2s var(--ease)}
+  .dots button.on{background:var(--rust);transform:scale(1.15)}
+
+  /* video */
+  .vid{position:relative;padding-top:56.25%;border-radius:24px;overflow:hidden;border:1px solid var(--line);margin-top:clamp(24px,3.5vw,36px);background:#000}
+  .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .btn-row{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);color:var(--ink);padding:12px 24px;border-radius:40px;font-weight:600;font-size:14.5px;transition:border-color .2s,color .2s,transform .25s var(--ease)}
+  .btn-ghost:hover{border-color:var(--rust);color:var(--rust-2);transform:translateY(-2px)}
+
+  /* ---------- CONTACT (shared treatment) ---------- */
+  .contact{background:var(--ink);color:#F1E7D8;text-align:center;border-radius:clamp(28px,5vw,46px) clamp(28px,5vw,46px) 0 0;margin-top:clamp(50px,7vw,80px);padding:clamp(56px,8vw,104px) 0}
+  .contact h2{font-family:var(--f-name);font-weight:800;font-size:clamp(32px,5.4vw,58px);letter-spacing:-.025em;line-height:1.04;max-width:18ch;margin:0 auto 16px}
+  .contact h2 em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--peach-1);text-transform:none}
+  .contact .csub{color:#C7B6A0;max-width:46ch;margin:0 auto 38px;line-height:1.6}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta{padding:15px 30px;border-radius:40px;font-weight:600;font-size:15px;transition:transform .25s var(--ease)}
+  .cta.primary{background:var(--rust);color:#fff}
+  .cta.ghost{border:1px solid #4A3F32;color:#F1E7D8}
+  .cta:hover{transform:translateY(-2px)}
+  .contact .small{margin-top:42px;font-size:13px;color:#8C7C66;letter-spacing:.03em}
+  .contact .small a{color:#C7B6A0}
+
+  footer{background:var(--ink);color:#8C7C66;text-align:center;padding:26px 0;font-size:13px;letter-spacing:.03em}
+
+  /* ---------- lightbox ---------- */
+  .lb{position:fixed;inset:0;z-index:var(--z-modal);background:color-mix(in srgb,var(--ink) 92%,#000);display:none;place-items:center;padding:24px}
+  .lb.open{display:grid}
+  body.lb-open{overflow:hidden}
+  .lb figure{margin:0;display:grid;gap:14px;place-items:center;max-width:94vw;max-height:92vh}
+  .lb img{max-width:94vw;max-height:84vh;object-fit:contain;border-radius:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.7)}
+  .lb figcaption{color:#E8D9C4;font-size:14px;text-align:center;font-family:var(--f-body)}
+  .lb-btn{position:absolute;background:color-mix(in srgb,var(--white) 92%,transparent);border:none;color:var(--ink);cursor:pointer;
+    width:48px;height:48px;border-radius:50%;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,0,0,.5);transition:background .2s,transform .2s var(--ease)}
+  .lb-btn:hover{background:var(--white);transform:scale(1.07)}
+  .lb-close{top:20px;right:22px}
+  .lb-prev{left:18px;top:50%;transform:translateY(-50%)}
+  .lb-next{right:18px;top:50%;transform:translateY(-50%)}
+  .lb-prev:hover,.lb-next:hover{transform:translateY(-50%) scale(1.07)}
+
+  /* back to top */
+  .totop{position:fixed;right:22px;bottom:22px;z-index:var(--z-backtop);width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--ink);color:#fff;font-size:19px;display:none;align-items:center;justify-content:center;box-shadow:0 12px 26px -10px rgba(120,70,20,.7);transition:background .2s,transform .25s var(--ease)}
+  .totop.show{display:flex}
+  .totop:hover{background:var(--rust-2);transform:translateY(-3px)}
+
+  /* ---------- reveal (default visible; enriches only with JS) ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .js .rv.in{opacity:1;transform:none}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){ .nav-links{display:none} }
+  @media (max-width:680px){
+    .fromto{grid-template-columns:1fr;gap:22px}
+    .ft-arrow{flex-direction:row}
+    .ft-arrow .glyph{transform:rotate(90deg)}
+    .shots{grid-template-columns:1fr}
+    .specs{grid-template-columns:1fr;gap:11px}
+  }
+</style>
 </head>
 <body>
-  <nav>
-    <div class="wrap nav-in">
-      <div class="brand">Portfolio.</div>
-      <div class="nav-links">
-        <a href="index.html" data-en="Home" data-zh="首頁">Home</a>
-        <a href="#work" data-en="Work" data-zh="作品">Work</a>
-        <a href="#proj-1" data-en="Process" data-zh="流程">Process</a>
+<a class="skip" href="#case-1" data-zh="跳到內容">Skip to content</a>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Harris<b>.</b></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" data-zh="首頁">Home</a>
+      <a href="#case-1" data-zh="不良品看板">Dashboard</a>
+      <a href="#case-2" data-zh="教育推廣">Outreach</a>
+      <a href="#case-3" data-zh="音樂">Music</a>
+    </nav>
+    <div class="nav-right">
+      <button type="button" class="btn-lang" id="lang-toggle" aria-label="切換為繁體中文">中文</button>
+      <a href="#contact" class="btn-contact" data-zh="與我聯絡">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HEADER ===== -->
+<section class="phead" id="top">
+  <div class="wrap">
+    <a class="back" href="index.html"><span aria-hidden="true">&larr;</span> <span data-zh="林壯熊 · 作品集">Harris Kristanto</span></a>
+    <span class="ph-eyebrow" data-zh="精選作品">Selected work</span>
+    <h1 class="ph-title" data-zh="案例研究">Case studies</h1>
+    <p class="ph-sub" data-zh="三個深入的作品——我持續打磨的報表系統、一份教育推廣簡報，以及一個 AI 音樂實驗。">Three builds in depth — the reporting system I keep refining, an education-outreach slideshow, and an AI music experiment.</p>
+  </div>
+</section>
+
+<main>
+<!-- ===== CASE 1 ===== -->
+<section class="case" id="case-1">
+  <div class="wrap">
+    <div class="rv">
+      <span class="case-label" data-zh="代表作">Flagship build</span>
+      <h2 class="case-h" data-zh="不良品報表，<em>自動完成</em>">Non-conformance reporting, <em>on autopilot</em></h2>
+      <p class="case-lead" data-zh="過去每週都得從 T100 ERP 匯出全廠報廢資料、再手動整理——光是複製貼上就要約兩小時，才看得出趨勢。我做了一支單頁網頁應用，匯入一次就完成。">Every week, scrap data from across the plant had to be pulled from the T100 ERP and shaped by hand — about two hours of copy-paste before anyone could read a trend. I built a single-page app that does it in one import.</p>
+    </div>
+
+    <div class="fromto rv">
+      <div class="ft-cell from">
+        <div class="k" data-zh="導入前">Before</div>
+        <div class="v">2 <span style="font-size:.42em;font-weight:700" data-zh="小時">hrs</span></div>
+        <div class="note" data-zh="人工複製貼上">Manual copy-paste</div>
       </div>
-      <div class="nav-right">
-        <button class="lang" id="lang">中文</button>
-        <a class="pill" href="mailto:harriskristanto19ra@gmail.com" data-en="Contact" data-zh="聯絡">Contact</a>
+      <div class="ft-arrow">
+        <span class="glyph" aria-hidden="true">&rarr;</span>
+        <span class="pct" data-zh="減少 96% 工時">96% less time</span>
+      </div>
+      <div class="ft-cell to">
+        <div class="k" data-zh="導入後">After</div>
+        <div class="v">&lt;5 <span style="font-size:.42em;font-weight:700" data-zh="分鐘">min</span></div>
+        <div class="note" data-zh="一次 Excel 匯入">One Excel import</div>
       </div>
     </div>
-  </nav>
 
-  <header class="hero wrap">
-    <span class="avail"><i></i> <span data-en="Available for new opportunities" data-zh="開放新的合作機會">Available for new opportunities</span></span>
-    <h1><span class="serif" data-en="Selected" data-zh="精選">Selected</span> <span data-en="Work" data-zh="作品">Work</span></h1>
-    <p data-en="A short collection of projects in automation, design, and AI." data-zh="自動化、設計與 AI 的精選作品。">A short collection of projects in automation, design, and AI.</p>
-  </header>
+    <div class="rv">
+      <h3 class="case-h3" data-zh="運作方式">How it works</h3>
+      <p class="case-lead" style="margin-top:0" data-zh="丟入每週的 Excel 匯出檔，程式以 SheetJS 解析，再用 Chart.js 畫出每日報廢趨勢，以及依產品、部門與不良原因的前十名分析。">Drop in the weekly Excel export; the app parses it with SheetJS, then renders daily scrap trends and Top-10 breakdowns by product, department, and defect reason with Chart.js.</p>
+      <div class="tags">
+        <span>HTML SPA</span><span>JavaScript</span><span>Chart.js</span><span>SheetJS</span><span data-zh="AI 輔助">AI-assisted</span>
+      </div>
+    </div>
 
-  <main class="wrap" id="work">
+    <div class="rv">
+      <h3 class="case-h3" data-zh="儀表板內容">On the dashboard</h3>
+      <ul class="specs">
+        <li data-zh="每日報廢趨勢（金額與數量）">Daily scrap trend, by cost and quantity</li>
+        <li data-zh="報廢金額前十名產品">Top-10 products by scrap value</li>
+        <li data-zh="依部門分析">Breakdown by department</li>
+        <li data-zh="依不良原因分析">Breakdown by defect reason</li>
+        <li data-zh="四項摘要 KPI 一目了然">Four summary KPIs at a glance</li>
+        <li data-zh="可切換語言與篩選條件">Switchable language and filters</li>
+      </ul>
+    </div>
 
-    <!-- 01 -->
-    <section class="sec" id="proj-1">
-      <article class="proj">
-        <div class="proj-top">
-          <div class="num">01</div>
-          <div>
-            <h3 data-en="Non-Conform Data Automation" data-zh="不良品資料自動化">Non-Conform Data Automation</h3>
-            <div class="tag" data-en="AI · Automation · Dashboard" data-zh="AI · 自動化 · 看板">AI · Automation · Dashboard</div>
-          </div>
-        </div>
-        <p class="lead" data-en="AI-generated code turns a weekly factory scrap report into a live, visual dashboard — download the Excel export, import it, and the board builds itself." data-zh="AI 生成的程式將每週工廠報廢報表轉換為即時視覺看板——下載 Excel 匯出檔、匯入，看板即自動生成。">AI-generated code turns a weekly factory scrap report into a live, visual dashboard — download the Excel export, import it, and the board builds itself.</p>
-
-        <div class="ba">
-          <div class="box before">
-            <div class="lbl" data-en="Before" data-zh="導入前">Before</div>
-            <div class="big" data-en="2 hrs+" data-zh="2 小時+">2 hrs+</div>
-            <div class="sub" data-en="Manual aggregation" data-zh="人工彙整資料">Manual aggregation</div>
-          </div>
-          <div class="mid">
-            <span class="glyph">&rarr;</span>
-            <span class="pct" data-en="96% faster" data-zh="提升 96%">96% faster</span>
-          </div>
-          <div class="box after">
-            <div class="lbl" data-en="After" data-zh="導入後">After</div>
-            <div class="big" data-en="5 min" data-zh="5 分鐘">5 min</div>
-            <div class="sub" data-en="Automated board" data-zh="自動產出看板">Automated board</div>
-          </div>
-        </div>
-
-        <div class="chips">
-          <span class="chip" data-en="4 KPI cards" data-zh="4 張 KPI 卡片">4 KPI cards</span>
-          <span class="chip" data-en="12 chart views" data-zh="12 種圖表">12 chart views</span>
-          <span class="chip" data-en="Daily scrap trend" data-zh="每日報廢趨勢">Daily scrap trend</span>
-          <span class="chip" data-en="Built with Gemini" data-zh="使用 Gemini 製作">Built with Gemini</span>
-        </div>
-
-        <div class="shots">
-          <figure>
-            <img class="zoom" loading="lazy" src="images/non-conform-dashboard.png"
-                 alt="Interactive non-conform dashboard" data-en-cap="Interactive non-conform dashboard" data-zh-cap="互動式不良品看板"
-                 data-label="Dashboard" onerror="ph(this)" />
-            <figcaption data-en="Interactive non-conform dashboard" data-zh="互動式不良品看板">Interactive non-conform dashboard</figcaption>
-          </figure>
-          <figure>
-            <img class="zoom" loading="lazy" src="images/non-conform-excel.png"
-                 alt="Raw weekly export from T100" data-en-cap="Raw weekly export from T100" data-zh-cap="T100 每週原始匯出檔"
-                 data-label="T100 Excel export" onerror="ph(this)" />
-            <figcaption data-en="Raw weekly export from T100" data-zh="T100 每週原始匯出檔">Raw weekly export from T100</figcaption>
-          </figure>
-        </div>
-      </article>
-    </section>
-
-    <!-- 02 -->
-    <section class="sec" id="proj-2">
-      <article class="proj">
-        <div class="proj-top">
-          <div class="num">02</div>
-          <div>
-            <h3 data-en="OCAC Education Promotion" data-zh="僑委會教育推廣">OCAC Education Promotion</h3>
-            <div class="tag" data-en="Slideshow · Outreach" data-zh="簡報 · 推廣">Slideshow · Outreach</div>
-          </div>
-        </div>
-        <p class="lead" data-en="A picture slideshow for the overseas education promotion campaign." data-zh="海外教育推廣活動的圖片簡報。">A picture slideshow for the overseas education promotion campaign.</p>
-
-        <div class="show" id="ocac">
-          <div class="stage">
-            <div class="slide on"><img class="zoom" loading="lazy" src="images/ocac-1.jpg" alt="OCAC slide 1" data-en-cap="OCAC slide 1" data-zh-cap="OCAC 簡報 1" data-label="OCAC slide 1" onerror="ph(this)" /></div>
-            <div class="slide"><img class="zoom" loading="lazy" src="images/ocac-2.jpg" alt="OCAC slide 2" data-en-cap="OCAC slide 2" data-zh-cap="OCAC 簡報 2" data-label="OCAC slide 2" onerror="ph(this)" /></div>
-            <div class="slide"><img class="zoom" loading="lazy" src="images/ocac-3.jpg" alt="OCAC slide 3" data-en-cap="OCAC slide 3" data-zh-cap="OCAC 簡報 3" data-label="OCAC slide 3" onerror="ph(this)" /></div>
-          </div>
-          <button class="arw l" aria-label="Previous">&lsaquo;</button>
-          <button class="arw r" aria-label="Next">&rsaquo;</button>
-          <div class="dots"></div>
-        </div>
-      </article>
-    </section>
-
-    <!-- 03 -->
-    <section class="sec" id="proj-3">
-      <article class="proj">
-        <div class="proj-top">
-          <div class="num">03</div>
-          <div>
-            <h3 data-en="AI Music with Suno" data-zh="用 Suno 製作 AI 音樂">AI Music with Suno</h3>
-            <div class="tag" data-en="Generative AI · Music" data-zh="生成式 AI · 音樂">Generative AI · Music</div>
-          </div>
-        </div>
-        <p class="lead" data-en="Original tracks composed with Suno AI. Preview one below." data-zh="使用 Suno AI 創作的原創音樂，下方可預覽。">Original tracks composed with Suno AI. Preview one below.</p>
-
-        <div class="vid">
-          <iframe src="https://www.youtube.com/embed/4ILfhN7w7qg" title="Suno AI music preview" loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="btn-line">
-          <a class="btn-out" href="https://www.youtube.com/watch?v=4ILfhN7w7qg" target="_blank" rel="noopener"
-             data-en="▶ Watch on YouTube" data-zh="▶ 在 YouTube 觀看">▶ Watch on YouTube</a>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer class="wrap">
-    <span>&copy; <span id="yr"></span> <span data-en="Portfolio" data-zh="作品集">Portfolio</span></span>
-    <a href="index.html" data-en="Back to home →" data-zh="返回首頁 →">Back to home →</a>
-  </footer>
-
-  <button class="top" id="top" aria-label="Back to top">&uarr;</button>
-
-  <!-- fullscreen image viewer -->
-  <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-label="Image viewer">
-    <button class="lb-btn lb-close" aria-label="Close (Esc)">&times;</button>
-    <button class="lb-btn lb-prev" aria-label="Previous image">&lsaquo;</button>
-    <button class="lb-btn lb-next" aria-label="Next image">&rsaquo;</button>
-    <figure><img id="lb-img" src="" alt="" /><figcaption id="lb-cap"></figcaption></figure>
+    <div class="shots rv">
+      <figure>
+        <img class="zoom" loading="lazy" src="images/non-conform-dashboard.png" alt="The non-conformance dashboard"
+             data-cap="The dashboard, built from one Excel import" data-cap-zh="由一次 Excel 匯入生成的儀表板"
+             data-label="Dashboard" onerror="ph(this)" />
+        <figcaption data-zh="由一次 Excel 匯入生成的儀表板">The dashboard, built from one Excel import</figcaption>
+      </figure>
+      <figure>
+        <img class="zoom" loading="lazy" src="images/non-conform-excel.png" alt="The raw weekly export from T100"
+             data-cap="The raw weekly export from T100" data-cap-zh="T100 每週原始匯出檔"
+             data-label="Excel export" onerror="ph(this)" />
+        <figcaption data-zh="T100 每週原始匯出檔">The raw weekly export from T100</figcaption>
+      </figure>
+    </div>
   </div>
+</section>
 
-  <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
+<!-- ===== CASE 2 ===== -->
+<section class="case alt" id="case-2">
+  <div class="wrap">
+    <div class="rv">
+      <span class="case-label" data-zh="推廣">Outreach</span>
+      <h2 class="case-h" data-zh="僑委會<em>教育推廣</em>">OCAC <em>education promotion</em></h2>
+      <p class="case-lead" data-zh="為僑界教育推廣製作的圖片簡報。圖片尚未上傳——下方的播放器已經備妥，加入檔案後就會自動顯示。">A picture slideshow made for an overseas-community education campaign. The slides aren't uploaded yet — the viewer below is ready, and will fill in the moment the files are added.</p>
+    </div>
 
-    /* language toggle (English / Traditional Chinese) */
-    let lang = localStorage.getItem('lang') || 'en';
-    function setLang(l){
-      lang = l;
-      document.documentElement.lang = l === 'zh' ? 'zh-Hant' : 'en';
-      document.title = l === 'zh' ? '精選作品' : 'Selected Work';
-      document.querySelectorAll('[data-en]').forEach(el => { el.textContent = el.dataset[l]; });
-      document.querySelectorAll('img[data-en-cap]').forEach(im => {
-        im.alt = im.dataset[l + 'Cap'] || im.alt;
-        im.title = l === 'zh' ? '點擊放大' : 'Click to enlarge';
-      });
-      document.getElementById('lang').textContent = l === 'zh' ? 'EN' : '中文';
-      localStorage.setItem('lang', l);
-    }
-    document.getElementById('lang').onclick = () => setLang(lang === 'en' ? 'zh' : 'en');
+    <div class="show rv" id="ocac">
+      <div class="stage">
+        <div class="slide on"><img class="zoom" loading="lazy" src="images/ocac-1.jpg" alt="OCAC slide 1" data-cap="OCAC promotion — slide 1" data-cap-zh="僑委會推廣 — 第 1 張" data-label="Slide 1" onerror="ph(this)" /></div>
+        <div class="slide"><img class="zoom" loading="lazy" src="images/ocac-2.jpg" alt="OCAC slide 2" data-cap="OCAC promotion — slide 2" data-cap-zh="僑委會推廣 — 第 2 張" data-label="Slide 2" onerror="ph(this)" /></div>
+        <div class="slide"><img class="zoom" loading="lazy" src="images/ocac-3.jpg" alt="OCAC slide 3" data-cap="OCAC promotion — slide 3" data-cap-zh="僑委會推廣 — 第 3 張" data-label="Slide 3" onerror="ph(this)" /></div>
+      </div>
+      <button class="arw l" type="button" aria-label="Previous slide">&lsaquo;</button>
+      <button class="arw r" type="button" aria-label="Next slide">&rsaquo;</button>
+      <div class="dots" role="tablist" aria-label="Slides"></div>
+    </div>
+  </div>
+</section>
 
-    /* image placeholder when a file isn't uploaded yet */
-    function ph(img){
-      const d = document.createElement('div'); d.className = 'ph';
-      d.innerHTML = '🖼 ' + (img.dataset.label || 'Image') + ' — add <code>' + img.getAttribute('src') + '</code>';
-      img.replaceWith(d);
-    }
+<!-- ===== CASE 3 ===== -->
+<section class="case" id="case-3">
+  <div class="wrap">
+    <div class="rv">
+      <span class="case-label" data-zh="實驗">Experiment</span>
+      <h2 class="case-h" data-zh="用 Suno <em>製作音樂</em>">Music, <em>made with Suno</em></h2>
+      <p class="case-lead" data-zh="用 Suno AI 生成原創音樂的實驗。這是其中一首，直接從 YouTube 預覽。">An experiment in generating original tracks with Suno AI. Here's one, previewed straight from YouTube.</p>
+    </div>
 
-    /* slideshow */
-    (function(){
-      const r = document.getElementById('ocac'); if(!r) return;
-      const s = [...r.querySelectorAll('.slide')], dw = r.querySelector('.dots'); let i = 0;
-      s.forEach((_, x) => { const b = document.createElement('button'); b.onclick = () => go(x); dw.appendChild(b); });
-      const d = [...dw.children];
-      function go(n){ i = (n + s.length) % s.length; s.forEach((e, x) => e.classList.toggle('on', x === i)); d.forEach((e, x) => e.classList.toggle('on', x === i)); }
-      r.querySelector('.r').onclick = () => go(i + 1); r.querySelector('.l').onclick = () => go(i - 1); go(0);
-      const st = r.querySelector('.stage'); let sx = 0;
-      st.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
-      st.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1); });
-    })();
+    <div class="vid rv">
+      <iframe src="https://www.youtube-nocookie.com/embed/4ILfhN7w7qg" title="Suno AI music preview" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="btn-row rv">
+      <a class="btn-ghost" href="https://www.youtube.com/watch?v=4ILfhN7w7qg" target="_blank" rel="noopener"
+         data-zh="在 YouTube 觀看 ↗">Watch on YouTube ↗</a>
+    </div>
+  </div>
+</section>
+</main>
 
-    /* fullscreen image viewer (lightbox) */
-    (function(){
-      const lb = document.getElementById('lb'), im = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
-      const pics = () => [...document.querySelectorAll('img.zoom')]; let idx = 0;
-      function paint(){ const a = pics(); if(!a.length) return; idx = (idx + a.length) % a.length;
-        const p = a[idx]; im.src = p.currentSrc || p.src; im.alt = p.alt || ''; cap.textContent = p.alt || ''; }
-      function open(p){ idx = pics().indexOf(p); lb.classList.add('open'); document.body.classList.add('lb-open');
-        lb.setAttribute('aria-hidden','false'); paint(); }
-      function close(){ lb.classList.remove('open'); document.body.classList.remove('lb-open');
-        lb.setAttribute('aria-hidden','true'); im.src = ''; }
-      document.addEventListener('click', e => { const p = e.target.closest('img.zoom'); if(p) open(p); });
-      lb.querySelector('.lb-close').onclick = close;
-      lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); idx--; paint(); };
-      lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); idx++; paint(); };
-      lb.addEventListener('click', e => { if(e.target === lb || e.target.tagName === 'FIGURE') close(); });
-      document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return;
-        if(e.key === 'Escape') close(); else if(e.key === 'ArrowRight'){ idx++; paint(); } else if(e.key === 'ArrowLeft'){ idx--; paint(); } });
-    })();
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 data-zh="想看實際運作？<em>聊聊吧。</em>">Want to see one running? <em>Let's talk.</em></h2>
+    <p class="csub" data-zh="正在尋找資訊科技與軟體開發的職缺，現居台灣台中。">Open to information technology and software development roles. Based in Taichung, Taiwan.</p>
+    <div class="cta-row">
+      <a class="cta primary" href="mailto:harriskristanto19ra@gmail.com" data-zh="寄信給我">Email me</a>
+      <a class="cta ghost" href="index.html" data-zh="← 回到完整作品集">&larr; Back to the full portfolio</a>
+    </div>
+    <p class="small"><a href="mailto:harriskristanto19ra@gmail.com">harriskristanto19ra@gmail.com</a> · <span data-zh="台灣台中">Taichung, Taiwan</span></p>
+  </div>
+</section>
 
-    /* back-to-top */
-    (function(){
-      const b = document.getElementById('top');
-      addEventListener('scroll', () => b.classList.toggle('show', scrollY > 500), {passive:true});
-      b.onclick = () => scrollTo({top:0, behavior:'smooth'});
-    })();
+<footer>© <span id="yr"></span> Harris Kristanto · 林壯熊 — <span data-zh="純手工打造。">Built from scratch.</span></footer>
 
-    setLang(lang);
-  </script>
+<button class="totop" id="totop" type="button" aria-label="Back to top">&uarr;</button>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-btn lb-close" type="button" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous image">&lsaquo;</button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next image">&rsaquo;</button>
+  <figure><img id="lb-img" src="" alt="" /><figcaption id="lb-cap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isZh = function(){ return document.documentElement.lang === 'zh-Hant'; };
+
+  /* ----- language toggle (EN ⇄ Traditional Chinese) — same mechanism as home ----- */
+  var langNodes = Array.prototype.slice.call(document.querySelectorAll('[data-zh]'));
+  var enHTML = langNodes.map(function(el){ return el.innerHTML; });
+  var toggle = document.getElementById('lang-toggle');
+  function setLang(lang){
+    var zh = lang === 'zh';
+    document.documentElement.lang = zh ? 'zh-Hant' : 'en';
+    langNodes.forEach(function(el,i){ el.innerHTML = zh ? el.getAttribute('data-zh') : enHTML[i]; });
+    toggle.textContent = zh ? 'EN' : '中文';
+    toggle.setAttribute('aria-label', zh ? 'Switch to English' : '切換為繁體中文');
+    try{ localStorage.setItem('lang', lang); }catch(e){}
+  }
+  toggle.addEventListener('click', function(){ setLang(isZh() ? 'en' : 'zh'); });
+  try{ if(localStorage.getItem('lang') === 'zh') setLang('zh'); }catch(e){}
+
+  /* ----- nav border on scroll ----- */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 12); }, {passive:true});
+
+  /* ----- back to top ----- */
+  var totop = document.getElementById('totop');
+  window.addEventListener('scroll', function(){ totop.classList.toggle('show', window.scrollY > 600); }, {passive:true});
+  totop.addEventListener('click', function(){ window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}); });
+
+  /* ----- missing-image placeholder (language-neutral) ----- */
+  window.ph = function(img){
+    var d = document.createElement('div'); d.className = 'ph';
+    var g = document.createElement('div'); g.className = 'g'; g.textContent = (img.dataset.label || 'Image');
+    var c = document.createElement('code'); c.textContent = img.getAttribute('src');
+    d.appendChild(g); d.appendChild(c); img.replaceWith(d);
+  };
+
+  /* ----- slideshow ----- */
+  (function(){
+    var r = document.getElementById('ocac'); if(!r) return;
+    var s = Array.prototype.slice.call(r.querySelectorAll('.slide'));
+    var dw = r.querySelector('.dots'); var i = 0;
+    s.forEach(function(_, x){ var b = document.createElement('button'); b.type='button';
+      b.setAttribute('aria-label','Go to slide '+(x+1)); b.addEventListener('click', function(){ go(x); }); dw.appendChild(b); });
+    var d = Array.prototype.slice.call(dw.children);
+    function go(n){ i = (n + s.length) % s.length;
+      s.forEach(function(e,x){ e.classList.toggle('on', x===i); });
+      d.forEach(function(e,x){ e.classList.toggle('on', x===i); }); }
+    r.querySelector('.r').addEventListener('click', function(){ go(i+1); });
+    r.querySelector('.l').addEventListener('click', function(){ go(i-1); });
+    go(0);
+    var st = r.querySelector('.stage'), sx = 0;
+    st.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+    st.addEventListener('touchend', function(e){ var dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40) go(dx < 0 ? i+1 : i-1); });
+  })();
+
+  /* ----- lightbox ----- */
+  (function(){
+    var lb = document.getElementById('lb'), im = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+    var opener = null, idx = 0;
+    function pics(){ return Array.prototype.slice.call(document.querySelectorAll('img.zoom')); }
+    function paint(){ var a = pics(); if(!a.length) return; idx = (idx + a.length) % a.length;
+      var p = a[idx]; im.src = p.currentSrc || p.src; im.alt = p.alt || '';
+      cap.textContent = (isZh() ? p.dataset.capZh : p.dataset.cap) || ''; }
+    function open(p){ opener = document.activeElement; idx = pics().indexOf(p);
+      lb.classList.add('open'); document.body.classList.add('lb-open'); lb.setAttribute('aria-hidden','false');
+      paint(); lb.querySelector('.lb-close').focus(); }
+    function close(){ lb.classList.remove('open'); document.body.classList.remove('lb-open');
+      lb.setAttribute('aria-hidden','true'); im.src = ''; if(opener && opener.focus) opener.focus(); }
+    document.addEventListener('click', function(e){ var p = e.target.closest && e.target.closest('img.zoom'); if(p) open(p); });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', function(e){ e.stopPropagation(); idx--; paint(); });
+    lb.querySelector('.lb-next').addEventListener('click', function(e){ e.stopPropagation(); idx++; paint(); });
+    lb.addEventListener('click', function(e){ if(e.target === lb || e.target.tagName === 'FIGURE') close(); });
+    document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') close(); else if(e.key === 'ArrowRight'){ idx++; paint(); } else if(e.key === 'ArrowLeft'){ idx--; paint(); } });
+  })();
+
+  /* ----- scroll reveal (keep last; default state is visible) ----- */
+  var els = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var sibs = Array.prototype.slice.call(e.target.parentNode.children).filter(function(n){ return n.classList.contains('rv'); });
+        e.target.style.transitionDelay = (Math.max(0, sibs.indexOf(e.target)) * 70) + 'ms';
+        e.target.classList.add('in'); io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+  window.addEventListener('load', function(){ setTimeout(function(){ els.forEach(function(el){ if(!el.classList.contains('in')) el.classList.add('in'); }); }, 2200); });
+})();
+</script>
 </body>
 </html>
