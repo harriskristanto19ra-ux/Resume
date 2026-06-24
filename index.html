@@ -99,7 +99,8 @@
     box-shadow:0 34px 64px -30px rgba(120,70,20,.55);
     overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   }
-  /* To use a real photo: add  background:url('your-photo.jpg') center/cover;  to .photo and remove .photo-mono + .photo-hint */
+  /* Drop a headshot at images/headshot.jpg and it fills this frame; otherwise the HK monogram shows. */
+  .photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1}
   .photo-mono{font-family:var(--f-name);font-weight:900;font-size:clamp(58px,9vw,100px);color:var(--peach-1);letter-spacing:-.04em}
   .photo-hint{font-size:12.5px;color:var(--ink-soft);font-family:var(--f-serif);font-style:italic;margin-top:4px;padding:0 28px}
 
@@ -314,10 +315,11 @@
     <span class="serif-there" data-zh="你好">there</span>
 
     <div class="photo-wrap">
-      <!-- Swap in a headshot: add  background:url('your-photo.jpg') center/cover  to .photo and remove the two lines below -->
       <div class="photo">
-        <div class="photo-mono">HK</div>
-        <div class="photo-hint">Drop your headshot here</div>
+        <!-- Headshot loads when images/headshot.jpg exists; otherwise it removes itself and the HK monogram shows. -->
+        <img class="photo-img" src="images/headshot.jpg" alt="Harris Kristanto" onerror="this.remove()" />
+        <div class="photo-mono" aria-hidden="true">HK</div>
+        <div class="photo-hint" data-zh="放上你的大頭照">Drop your headshot here</div>
       </div>
     </div>
 
