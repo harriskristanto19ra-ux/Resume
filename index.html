@@ -335,10 +335,7 @@
 
     <div class="photo-wrap">
       <div class="photo">
-        <!-- Headshot loads when images/headshot.jpg exists; otherwise it removes itself and the HK monogram shows. -->
         <img class="photo-img" src="images/headshot.jpg" alt="Harris Kristanto" onerror="this.remove()" />
-        <div class="photo-mono" aria-hidden="true">HK</div>
-        <div class="photo-hint" data-zh="放上你的大頭照">Drop your headshot here</div>
       </div>
     </div>
 
@@ -622,7 +619,7 @@
     nav.classList.toggle('scrolled', y > 12);
     if(fcta){
       var nearBottom = (y + window.innerHeight) > (document.documentElement.scrollHeight - 280);
-      fcta.classList.toggle('show', y > 440 && !nearBottom);
+      fcta.classList.toggle('show', !nearBottom);
     }
   }
   window.addEventListener('scroll', onScroll, {passive:true});
